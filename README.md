@@ -35,6 +35,6 @@ This function returns a linked list of insn_t types which are basically containe
 * __buflen__ - This is the length of the data being disassembled
 * __arch__ - One of ARCH__{arm ,x86, powerpc, mips}
 * __bits__ - 64-bit, 32-bit or 16-bit
-*_ _endian__ - 1 for big endian, 0 for little endian
+* _ _endian__ - 1 for big endian, 0 for little endian
 
 The _free_all_instrs_() function frees the memory allocated for the insn_list list.
