@@ -165,7 +165,7 @@ int my_fprintf(void* stream, const char * format, ...){
 
 // uint, char*, size_t, int, int -> insn_list *
 // Disassemble the raw buf for the given parameters
-void * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
+insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
     insn_list * ilist = NULL;
     bfd_byte* buf = NULL;
     disassemble_info* dis = NULL;

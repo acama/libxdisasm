@@ -46,7 +46,7 @@ void append_instr(insn_t * i, insn_list **ilist);
 
 // char *, char *, unsigned int -> void
 // Copy the bytes from src to dest, inverted way
-void * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian);
+insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian);
 
 // insn_list ** -> size_t
 // Count the number of instructions in the list
