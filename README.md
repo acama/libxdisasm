@@ -24,13 +24,16 @@ make
 
 Usage:
 ------
-As stated above, the library is pretty small and it basically is defined by one function:
+As stated above, the library is pretty small and it basically is defined by these two functions:
 ```
 insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian)
+void free_all_instrs(insn_list **ilist)
 ```
-This function returns a linked list of insn_t types which are basically containeres for decoded instructions. The arguments to the disassemble() function are described below:
+This function returns a linked list of insn_t types which are basically containeres for decoded instructions. The arguments to the _disassemble()_ function are described below:
 * __vma__ - This is the address where the raw buffer will be assumed to be loaded in memory
 * __rawbuf__ - This buffer points to the raw bytes that are supposed to be disassembled
 * __buflen__ - This is the length of the data being disassembled
 * __arch__ - One of ARCH__{arm ,x86, powerpc, mips}
 * __bits__ - 64-bit, 32-bit or 16-bit
+
+The _free_all_instrs_() function frees the memory allocated for the insn_list list.
