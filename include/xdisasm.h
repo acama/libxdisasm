@@ -60,4 +60,13 @@ void print_instr(insn_t * ins);
 // Print all the instructions in a formatted way
 void print_all_instrs(insn_list **ilist);
 
+// insn_t * -> void
+// Free the memory
+void free_instr(insn_t *);
+
+// insn_list ** -> void
+// Free the memory
+// Dirty
+void free_all_instrs(insn_list **ilist);
+
 #endif

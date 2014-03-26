@@ -33,6 +33,35 @@
 char curr_insn_str[MAX_INS_STRSIZE] = {0};
 char * currptr = curr_insn_str;
 
+// insn_t -> void
+// Free the memory
+void free_instr(insn_t *i){
+    
+    if(!i){
+        return;
+    }
+    
+    free(i->decoded_instrs);
+    free(i->opcodes);
+    free(i);
+}
+
+// insn_list ** -> void
+// Free the memory
+// Dirty
+void free_all_instrs(insn_list **ilist){
+    insn_list * l = *ilist;
+    insn_list * f = NULL;
+
+    /* free the insn_t's */
+    while(l != NULL){
+        free_instr(l->instr);
+        f = l;
+        l = l->next;
+        free(f);
+    }
+}
+
 // insn_t * -> void
 // Print instruction in a formatted way
 void print_instr(insn_t * ins){
