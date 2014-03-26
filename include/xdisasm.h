@@ -22,6 +22,7 @@
 #define XDISASM_H
 
 #define ARCH_arm 1
+#define ARCH_arm_thumb 5
 #define ARCH_mips 2
 #define ARCH_powerpc 3
 #define ARCH_x86 4

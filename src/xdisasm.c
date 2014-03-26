@@ -221,6 +221,11 @@ insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch
             else disas = print_insn_little_arm; 
             break;
 
+        case ARCH_arm_thumb:
+            if(bits == 32) disas = print_insn_thumb32;
+            else disas = print_insn_thumb16;
+            break;
+
         case ARCH_mips: // TODO: add mips64 support
             if(endian) disas = print_insn_big_mips;
             else disas = print_insn_little_mips; 
