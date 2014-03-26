@@ -19,14 +19,14 @@
 */
 
 
-#include "package.h"
+#include "../include/package.h"
 #include <stdlib.h>
 #include <stdarg.h>
 #include <bfd.h>     
 #include <dis-asm.h>
 #include <malloc.h>
 #include <string.h>
-#include "xdisasm.h"
+#include "../include/xdisasm.h"
 
 #define MAX_INS_STRSIZE 2048
 
