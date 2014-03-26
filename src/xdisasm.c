@@ -32,6 +32,8 @@
 
 char curr_insn_str[MAX_INS_STRSIZE] = {0};
 char * currptr = curr_insn_str;
+disassembler_ftype disas = NULL; // disassembler 
+disassemble_info* dis = NULL;
 
 // insn_t -> void
 // Free the memory
@@ -192,6 +194,111 @@ int my_fprintf(void* stream, const char * format, ...){
     return 0;
 }
 
+int init_dis_env(int arch, int bits, int endian){
+    
+    switch(arch){
+        case ARCH_arm:
+            if(endian) disas = print_insn_big_arm;
+            else disas = print_insn_little_arm; 
+            break;
+            /*
+               case ARCH_arm_thumb: TODO: implement
+               if(bits == 32) disas = print_insn_thumb32;
+               else disas = print_insn_thumb16;
+               break;
+               */
+        case ARCH_mips: // TODO: add mips64 support
+            if(endian) disas = print_insn_big_mips;
+            else disas = print_insn_little_mips; 
+            break;
+
+        case ARCH_powerpc: // TODO: add powerpc64 support
+            if(endian) disas = print_insn_big_powerpc;
+            else disas = print_insn_little_powerpc;
+            dis->arch = bfd_arch_powerpc;       // ppc cares about this
+            disassemble_init_for_target(dis);   // otherwise segfault
+            break;
+
+        case ARCH_x86:
+            if (bits == 16) dis->mach = bfd_mach_i386_i8086;
+            else if (bits == 64) dis->mach = !(bfd_mach_i386_i8086 | bfd_mach_i386_i386);
+            else dis->mach = bfd_mach_i386_i386;
+            disas = print_insn_i386_intel;
+            break;
+
+        default:
+            fprintf(stderr, "libxdisasm: Invalid architecture\n");
+            return -1;
+    }
+
+    return 0;
+
+}
+
+// char*, size_t, int, int -> insn_t *
+// Disassemble one instruction from the given buf
+insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
+    insn_t * curri = NULL;
+    bfd_byte* buf = NULL;
+    size_t pos = 0;
+
+    dis = (struct disassemble_info*) calloc(1, sizeof(disassemble_info));
+    init_disassemble_info (dis, stdout, my_fprintf);
+    buf = (bfd_byte*) rawbuf;
+
+    dis->buffer_vma = vma;
+    dis->buffer = buf;
+    dis->buffer_length = buflen;
+    dis->print_address_func = override_print_address;
+
+    pos = vma;
+
+    if(init_dis_env(arch, bits, endian)){
+        return NULL;
+    }
+   
+    curri = (insn_t *) malloc(sizeof(insn_t));
+    if(!curri){
+        perror("malloc");
+        return NULL;
+    }
+
+    curri->vma = pos;
+    unsigned int size = disas((bfd_vma) pos, dis);
+    curri->instr_size = size;
+
+    char * opcodes = (char *) malloc(size);
+    if(!opcodes){
+        perror("malloc");
+        return NULL;
+    }
+
+    if(arch == ARCH_x86){
+        copy_bytes_x86(opcodes, rawbuf + (pos - vma), size);
+    }else{
+        copy_bytes(opcodes, rawbuf + (pos - vma), size);
+    }
+    curri->opcodes = opcodes;
+
+    size_t istrlen = strlen(curr_insn_str);
+    char * decoded_instrs = (char *) malloc(istrlen + 1);
+    if(!decoded_instrs){
+        perror("malloc");
+        return NULL;
+    }
+   
+    memcpy(decoded_instrs, curr_insn_str, istrlen + 1);
+    curri->decoded_instrs = decoded_instrs;
+
+
+    memset(curr_insn_str, 0, sizeof(curr_insn_str));
+    currptr = curr_insn_str;
+    pos += size;
+
+    free(dis);
+    return curri;
+}
+
 // uint, char*, size_t, int, int -> insn_list *
 // Disassemble the raw buf for the given parameters
 insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
@@ -200,9 +307,13 @@ insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch
     disassemble_info* dis = NULL;
     unsigned int count = 0;
     size_t pos = 0, length = 0, max_pos = 0;
-    disassembler_ftype disas; 
 
     dis = (struct disassemble_info*) calloc(1, sizeof(disassemble_info));
+
+    if(!dis){
+        return NULL;
+    }
+
     init_disassemble_info (dis, stdout, my_fprintf);
     buf = (bfd_byte*) rawbuf;
 
@@ -215,17 +326,16 @@ insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch
     max_pos = dis->buffer_vma + length;
     pos = vma;
 
+    if(init_dis_env(arch, bits, endian)){
+        return NULL;
+    }
+   
+    /*
     switch(arch){
         case ARCH_arm:
             if(endian) disas = print_insn_big_arm;
             else disas = print_insn_little_arm; 
             break;
-        /*
-        case ARCH_arm_thumb: TODO: implement
-            if(bits == 32) disas = print_insn_thumb32;
-            else disas = print_insn_thumb16;
-            break;
-        */
         case ARCH_mips: // TODO: add mips64 support
             if(endian) disas = print_insn_big_mips;
             else disas = print_insn_little_mips; 
@@ -248,7 +358,7 @@ insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch
         default:
             fprintf(stderr, "libxdisasm: Invalid architecture\n");
             return NULL;
-    } 
+    }*/ 
    
     while(pos < max_pos)
       {
