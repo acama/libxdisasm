@@ -33,7 +33,7 @@
 char curr_insn_str[MAX_INS_STRSIZE] = {0};
 char * currptr = curr_insn_str;
 disassembler_ftype disas = NULL; // disassembler 
-disassemble_info* dis = NULL;
+disassemble_info* dis = NULL;   // disassembly information structure
 
 // insn_t -> void
 // Free the memory
@@ -290,7 +290,6 @@ insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arc
     memcpy(decoded_instrs, curr_insn_str, istrlen + 1);
     curri->decoded_instrs = decoded_instrs;
 
-
     memset(curr_insn_str, 0, sizeof(curr_insn_str));
     currptr = curr_insn_str;
     pos += size;
@@ -330,77 +329,46 @@ insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch
         return NULL;
     }
    
-    /*
-    switch(arch){
-        case ARCH_arm:
-            if(endian) disas = print_insn_big_arm;
-            else disas = print_insn_little_arm; 
-            break;
-        case ARCH_mips: // TODO: add mips64 support
-            if(endian) disas = print_insn_big_mips;
-            else disas = print_insn_little_mips; 
-            break;
-
-        case ARCH_powerpc: // TODO: add powerpc64 support
-            if(endian) disas = print_insn_big_powerpc;
-            else disas = print_insn_little_powerpc;
-            dis->arch = bfd_arch_powerpc;       // ppc cares about this
-            disassemble_init_for_target(dis);   // otherwise segfault
-            break;
-
-        case ARCH_x86:
-            if (bits == 16) dis->mach = bfd_mach_i386_i8086;
-            else if (bits == 64) dis->mach = !(bfd_mach_i386_i8086 | bfd_mach_i386_i386);
-            else dis->mach = bfd_mach_i386_i386;
-            disas = print_insn_i386_intel;
-            break;
-
-        default:
-            fprintf(stderr, "libxdisasm: Invalid architecture\n");
+    while(pos < max_pos){
+        insn_t * curri = (insn_t *) malloc(sizeof(insn_t));
+        if(!curri){
+            perror("malloc");
             return NULL;
-    }*/ 
-   
-    while(pos < max_pos)
-      {
-          insn_t * curri = (insn_t *) malloc(sizeof(insn_t));
-          if(!curri){
-              perror("malloc");
-              return NULL;
-          }
+        }
 
-          curri->vma = pos;
-          unsigned int size = disas((bfd_vma) pos, dis);
-          curri->instr_size = size;
+        curri->vma = pos;
+        unsigned int size = disas((bfd_vma) pos, dis);
+        curri->instr_size = size;
 
-          char * opcodes = (char *) malloc(size);
-          if(!opcodes){
-              perror("malloc");
-              return NULL;
-          }
-        
-          if(arch == ARCH_x86){
-              copy_bytes_x86(opcodes, rawbuf + (pos - vma), size);
-          }else{
-              copy_bytes(opcodes, rawbuf + (pos - vma), size);
-          }
-          curri->opcodes = opcodes;
+        char * opcodes = (char *) malloc(size);
+        if(!opcodes){
+            perror("malloc");
+            return NULL;
+        }
 
-          size_t istrlen = strlen(curr_insn_str);
-          char * decoded_instrs = (char *) malloc(istrlen + 1);
-          if(!decoded_instrs){
-              perror("malloc");
-              return NULL;
-          }
-          memcpy(decoded_instrs, curr_insn_str, istrlen + 1);
-          curri->decoded_instrs = decoded_instrs;
+        if(arch == ARCH_x86){
+            copy_bytes_x86(opcodes, rawbuf + (pos - vma), size);
+        }else{
+            copy_bytes(opcodes, rawbuf + (pos - vma), size);
+        }
+        curri->opcodes = opcodes;
+
+        size_t istrlen = strlen(curr_insn_str);
+        char * decoded_instrs = (char *) malloc(istrlen + 1);
+        if(!decoded_instrs){
+            perror("malloc");
+            return NULL;
+        }
+        memcpy(decoded_instrs, curr_insn_str, istrlen + 1);
+        curri->decoded_instrs = decoded_instrs;
 
 
-          memset(curr_insn_str, 0, sizeof(curr_insn_str));
-          currptr = curr_insn_str;
-          pos += size;
-          count++;
-          append_instr(curri, &ilist);
-      }
+        memset(curr_insn_str, 0, sizeof(curr_insn_str));
+        currptr = curr_insn_str;
+        pos += size;
+        count++;
+        append_instr(curri, &ilist);
+    }
 
     free(dis);
     return ilist;
