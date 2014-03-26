@@ -235,7 +235,7 @@ int init_dis_env(int arch, int bits, int endian){
 
 }
 
-// char*, size_t, int, int -> insn_t *
+// unsigned int, char*, size_t, int, int -> insn_t *
 // Disassemble one instruction from the given buf
 insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
     insn_t * curri = NULL;
@@ -298,7 +298,7 @@ insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arc
     return curri;
 }
 
-// uint, char*, size_t, int, int -> insn_list *
+// unsigned int, char*, size_t, int, int -> insn_list *
 // Disassemble the raw buf for the given parameters
 insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
     insn_list * ilist = NULL;
