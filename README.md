@@ -1,7 +1,7 @@
 libxdisasm
 ==========
 
-libxdisasm is a simple and small library that allows disassembly of raw bytes. It currently supports x86, x86_64, arm, ppc and mips. It is meant to provide a quick way to disassemble a raw chunk of bytes. An example of a tool that uses libxdisasm is http://github.com/acama/xdisasm.
+libxdisasm is a simple and small library that allows disassembly of raw bytes. It currently supports x86, x86_64, arm, ppc and mips. It is meant to provide a quick way to disassemble a raw chunk of bytes. An example of a tool that uses libxdisasm is [xdisasm](http://github.com/acama/xdisasm).
 
 Build Instructions
 ------------------
