@@ -243,6 +243,11 @@ insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arc
     size_t pos = 0;
 
     dis = (struct disassemble_info*) calloc(1, sizeof(disassemble_info));
+    
+    if(!dis){
+        return NULL;
+    }
+    
     init_disassemble_info (dis, stdout, my_fprintf);
     buf = (bfd_byte*) rawbuf;
 
@@ -303,7 +308,6 @@ insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arc
 insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
     insn_list * ilist = NULL;
     bfd_byte* buf = NULL;
-    disassemble_info* dis = NULL;
     unsigned int count = 0;
     size_t pos = 0, length = 0, max_pos = 0;
 
