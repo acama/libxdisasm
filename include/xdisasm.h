@@ -42,6 +42,10 @@ typedef struct insn_list{
 }insn_list;
 
 // insn_t *, insn_list ** -> void
+// Prepend instruction to list
+void prepend_instr(insn_t * i, insn_list **ilist);
+
+// insn_t *, insn_list ** -> void
 // Append instruction to list
 void append_instr(insn_t * i, insn_list **ilist);
 

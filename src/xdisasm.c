@@ -133,6 +133,25 @@ void init_list(insn_t *i, insn_list **ilist){
 }
 
 // insn_t *, insn_list ** -> void
+// Prepend instruction to list
+void prepend_instr(insn_t * i, insn_list **ilist){
+    insn_list * tmp = NULL;
+    insn_list * c = *ilist; 
+
+    if(c == NULL){
+        init_list(i, ilist);
+        return;
+    }
+
+
+    tmp = (insn_list *) malloc(sizeof(insn_list));
+    tmp->instr = i;
+    tmp->next = *ilist;
+
+    *ilist = tmp; 
+}
+
+// insn_t *, insn_list ** -> void
 // Append instruction to list
 void append_instr(insn_t * i, insn_list **ilist){
     insn_list * tmp = NULL;
