@@ -288,8 +288,12 @@ insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arc
     }
 
     curri->vma = pos;
-    unsigned int size = disas((bfd_vma) pos, dis);
+    int size = disas((bfd_vma) pos, dis);
     curri->instr_size = size;
+    
+    if(size < 1){
+        return NULL;
+    }
 
     char * opcodes = (char *) malloc(size);
     if(!opcodes){
