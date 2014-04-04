@@ -34,6 +34,7 @@ char curr_insn_str[MAX_INS_STRSIZE] = {0};
 char * currptr = curr_insn_str;
 disassembler_ftype disas = NULL; // disassembler 
 disassemble_info* dis = NULL;   // disassembly information structure
+char * disas_options = NULL;
 
 // insn_t -> void
 // Free the memory
@@ -218,14 +219,9 @@ int init_dis_env(int arch, int bits, int endian){
     switch(arch){
         case ARCH_arm:
             if(endian) disas = print_insn_big_arm;
-            else disas = print_insn_little_arm; 
+            else disas = print_insn_little_arm;
+            if(bits == 16) disas_options = "force-thumb";
             break;
-            /*
-               case ARCH_arm_thumb: TODO: implement
-               if(bits == 32) disas = print_insn_thumb32;
-               else disas = print_insn_thumb16;
-               break;
-               */
         case ARCH_mips: // TODO: add mips64 support
             if(endian) disas = print_insn_big_mips;
             else disas = print_insn_little_mips; 
@@ -270,17 +266,19 @@ insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arc
     init_disassemble_info (dis, stdout, my_fprintf);
     buf = (bfd_byte*) rawbuf;
 
+    if(init_dis_env(arch, bits, endian)){
+        return NULL;
+    }
+ 
     dis->buffer_vma = vma;
     dis->buffer = buf;
     dis->buffer_length = buflen;
     dis->print_address_func = override_print_address;
+    dis->disassembler_options = disas_options;
 
     pos = vma;
 
-    if(init_dis_env(arch, bits, endian)){
-        return NULL;
-    }
-   
+  
     curri = (insn_t *) malloc(sizeof(insn_t));
     if(!curri){
         perror("malloc");
@@ -343,18 +341,21 @@ insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch
     init_disassemble_info (dis, stdout, my_fprintf);
     buf = (bfd_byte*) rawbuf;
 
+    if(init_dis_env(arch, bits, endian)){
+        return NULL;
+    }
+   
     dis->buffer_vma = vma;
     dis->buffer = buf;
     dis->buffer_length = buflen;
     dis->print_address_func = override_print_address;
+    dis->disassembler_options = disas_options;
 
     length = dis->buffer_length;
     max_pos = dis->buffer_vma + length;
     pos = vma;
 
-    if(init_dis_env(arch, bits, endian)){
-        return NULL;
-    }
+    
    
     while(pos < max_pos){
         insn_t * curri = (insn_t *) malloc(sizeof(insn_t));
