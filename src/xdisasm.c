@@ -221,6 +221,7 @@ int init_dis_env(int arch, int bits, int endian){
             if(endian) disas = print_insn_big_arm;
             else disas = print_insn_little_arm;
             if(bits == 16) disas_options = "force-thumb";
+            else disas_options = "no-force-thumb";
             break;
         case ARCH_mips: // TODO: add mips64 support
             if(endian) disas = print_insn_big_mips;
@@ -263,10 +264,10 @@ insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arc
         return NULL;
     }
    
-    disas_options = NULL;
     init_disassemble_info (dis, stdout, my_fprintf);
     buf = (bfd_byte*) rawbuf;
 
+    disas_options = NULL;
     if(init_dis_env(arch, bits, endian)){
         return NULL;
     }
