@@ -216,7 +216,6 @@ int my_fprintf(void* stream, const char * format, ...){
 
 int init_dis_env(int arch, int bits, int endian){
    
-    disas_options = NULL;
     switch(arch){
         case ARCH_arm:
             if(endian) disas = print_insn_big_arm;
@@ -263,7 +262,8 @@ insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arc
     if(!dis){
         return NULL;
     }
-    
+   
+    disas_options = NULL;
     init_disassemble_info (dis, stdout, my_fprintf);
     buf = (bfd_byte*) rawbuf;
 
