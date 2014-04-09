@@ -53,8 +53,12 @@ void free_instr(insn_t *i){
 // Free the memory
 // Dirty
 void free_all_instrs(insn_list **ilist){
-    insn_list * l = *ilist;
-    insn_list * f = NULL;
+    insn_list * l, * f;
+
+    if(!ilist){
+        return;
+    }
+    l = *ilist;
 
     /* free the insn_t's */
     while(l != NULL){
@@ -69,11 +73,10 @@ void free_all_instrs(insn_list **ilist){
 // Print instruction in a formatted way
 void print_instr(insn_t * ins){
     size_t i, l;
-    char * tmpbuf = NULL, * ptr;
+    char * tmpbuf, * ptr;
 
-    if(ins == NULL){
+    if(!ins)
         return;
-    }
 
     printf("%08X  ", ins->vma);
     l = ins->instr_size;
@@ -113,8 +116,13 @@ void print_all_instrs(insn_list **ilist){
 // insn_list ** -> size_t
 // Count the number of instructions in the list
 size_t instr_num(insn_list **ilist){
-    insn_list * l = *ilist;
+    insn_list * l;
     size_t len = 0;
+
+    if(!ilist)
+        return 0;
+
+    l = *ilist;
 
     while(l != NULL){
         len++;
@@ -128,6 +136,12 @@ size_t instr_num(insn_list **ilist){
 // Initialize list
 void init_list(insn_t *i, insn_list **ilist){
     insn_list * l = (insn_list *) malloc(sizeof(insn_list));
+
+    if(!l){
+        perror("malloc");
+        return;
+    }
+
     l->instr = i;
     l->next = NULL;
     *ilist = l;
@@ -136,10 +150,14 @@ void init_list(insn_t *i, insn_list **ilist){
 // insn_t *, insn_list ** -> void
 // Prepend instruction to list
 void prepend_instr(insn_t * i, insn_list **ilist){
-    insn_list * tmp = NULL;
-    insn_list * c = *ilist; 
+    insn_list * tmp, *c;
 
-    if(c == NULL){
+    if(!ilist)
+        return;
+
+    c = *ilist;
+
+    if(!c){
         init_list(i, ilist);
         return;
     }
@@ -155,18 +173,20 @@ void prepend_instr(insn_t * i, insn_list **ilist){
 // insn_t *, insn_list ** -> void
 // Append instruction to list
 void append_instr(insn_t * i, insn_list **ilist){
-    insn_list * tmp = NULL;
-    insn_list * c = *ilist; 
+    insn_list * tmp, *c;
 
-    if(c == NULL){
+    if(!ilist)
+        return;
+
+    c = *ilist; 
+    
+    if(!c){
         init_list(i, ilist);
         return;
     }
 
-    if(c != NULL){
-        while(c->next != NULL){
-            c = c->next;
-        }
+    while(c->next != NULL){
+        c = c->next;
     }
 
     tmp = (insn_list *) malloc(sizeof(insn_list));
@@ -181,6 +201,9 @@ void append_instr(insn_t * i, insn_list **ilist){
 void copy_bytes_x86(char * dest, char * src, unsigned int siz){
     int i = 0;
 
+    if(!dest || !src)
+        return;
+
     for(; i < siz; i++){
         dest[i] = src[i];
     }
@@ -191,6 +214,9 @@ void copy_bytes_x86(char * dest, char * src, unsigned int siz){
 // Copy the bytes from src to dest, inverted way
 void copy_bytes(char * dest, char * src, unsigned int siz){
     int i = 0, j = 0;
+
+    if(!dest || !src)
+        return;
 
     for(i = siz - 1; i >= 0; i--, j++){
         dest[j] = src[i];
