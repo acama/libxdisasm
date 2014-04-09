@@ -1,4 +1,5 @@
-/*  xdisasm.h -- xdisasm header file
+/*  
+    xdisasm.h -- xdisasm header file
     Copyright (C) 2014  Amat I. Cama                                         
                                                                              
     This file is part of xdisasm.                                            
