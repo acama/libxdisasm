@@ -78,7 +78,7 @@ void print_instr(insn_t * ins){
     if(!ins)
         return;
 
-    printf("%08X  ", ins->vma);
+    printf("%p  ", (void *)ins->vma);
     l = ins->instr_size;
    
     tmpbuf = (char *) malloc((l * 2) + 1);
@@ -226,7 +226,7 @@ void copy_bytes(char * dest, char * src, unsigned int siz){
 // bfd_vma, struct disassemble_info * -> void
 // Formatter for address in memory referencing instructions
 void override_print_address(bfd_vma addr, struct disassemble_info *info){
-    sprintf(currptr, "0x%x", (unsigned int) addr);
+    sprintf(currptr, "%p", (void *) addr);
 }
 
 // void*, char * -> int
@@ -279,7 +279,7 @@ int init_dis_env(int arch, int bits, int endian){
 
 // unsigned int, char*, size_t, int, int -> insn_t *
 // Disassemble one instruction from the given buf
-insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
+insn_t * disassemble_one(unsigned long long vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
     insn_t * curri = NULL;
     bfd_byte* buf = NULL;
     size_t pos = 0;
@@ -354,11 +354,11 @@ insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arc
 
 // unsigned int, char*, size_t, int, int -> insn_list *
 // Disassemble the raw buf for the given parameters
-insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
+insn_list * disassemble(unsigned long long vma, char * rawbuf, size_t buflen, int arch, int bits, int endian){
     insn_list * ilist = NULL;
     bfd_byte* buf = NULL;
     unsigned int count = 0;
-    size_t pos = 0, length = 0, max_pos = 0;
+    unsigned long long pos = 0, length = 0, max_pos = 0;
 
     dis = (struct disassemble_info*) calloc(1, sizeof(disassemble_info));
 

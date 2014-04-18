@@ -30,7 +30,7 @@
 
 // instruction structure
 typedef struct insn_t{
-    unsigned int vma;
+    unsigned long long vma;
     size_t instr_size;
     char * opcodes;
     char * decoded_instrs;
@@ -52,11 +52,11 @@ void append_instr(insn_t * i, insn_list **ilist);
 
 // unsigned int, char *, unsigned int -> void
 // Copy the bytes from src to dest, inverted way
-insn_t * disassemble_one(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian);
+insn_t * disassemble_one(unsigned long long vma, char * rawbuf, size_t buflen, int arch, int bits, int endian);
 
 // unsigned int, char *, unsigned int -> void
 // Copy the bytes from src to dest, inverted way
-insn_list * disassemble(unsigned int vma, char * rawbuf, size_t buflen, int arch, int bits, int endian);
+insn_list * disassemble(unsigned long long vma, char * rawbuf, size_t buflen, int arch, int bits, int endian);
 
 // insn_list ** -> size_t
 // Count the number of instructions in the list
