@@ -226,7 +226,7 @@ void copy_bytes(char * dest, char * src, unsigned int siz){
 // bfd_vma, struct disassemble_info * -> void
 // Formatter for address in memory referencing instructions
 void override_print_address(bfd_vma addr, struct disassemble_info *info){
-    sprintf(currptr, "%", (void *) addr);
+    sprintf(currptr, "%p", (void *) addr);
 }
 
 // void*, char * -> int
