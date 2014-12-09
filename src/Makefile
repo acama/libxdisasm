@@ -5,17 +5,23 @@ MINOR := 0
 NAME := xdisasm
 BUILD_DIR ?= ../build
 VERSION := $(MAJOR).$(MINOR)
+BINUTILS = binutils-2.24
+BFD = $(BINUTILS)/bfd/
+OPCODES = $(BINUTILS)/opcodes/
+IBERTY = $(BINUTILS)/libiberty/
  
-lib: lib$(NAME).so
+lib: binutils lib$(NAME).so
 
-withstatic: lib$(NAME)_withstatic.so
+binutils:
+	test -d $(BINUTILS) || (wget http://ftp.gnu.org/gnu/binutils/$(NAME).tar.gz && tar -zxf $(BINUTILS).tar.gz)
+	cd $(BFD) && ./configure --enable-targets=all && make LDFLAGS="-all-static" CFLAGS="-fPIC"
+	cd $(OPCODES) && ./configure --enable-targets=all && make LDFLAGS="-all-static" CFLAGS="-fPIC" 
+	cd $(IBERTY) && ./configure && make LDFLAGS="-all-static" CFLAGS="-fPIC" 
 
 lib$(NAME).so: $(NAME).o
-	$(CC) -shared -Wl,-soname,lib$(NAME).so $^ -o $(BUILD_DIR)/lib/$@ -lbfd -lopcodes
- 
-lib$(NAME)_withstatic.so: $(NAME).o
-	$(CC) -shared -Wl,-soname,lib$(NAME).so $^ -o $(BUILD_DIR)/lib/lib$(NAME).so static/libopcodes.a static/libbfd.a static/libiberty.a -lz
+	$(CC) -shared -Wl,-soname,lib$(NAME).so $^ -o $(BUILD_DIR)/lib/lib$(NAME).so $(OPCODES)/libopcodes.a $(BFD)/libbfd.a $(IBERTY)/libiberty.a -lz
 
 clean:
 	$(RM) *.o *.so*
 	$(RM) $(BUILD_DIR)/lib/*.so
+	$(RM) $(BINUTILS)
