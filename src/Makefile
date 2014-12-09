@@ -13,7 +13,7 @@ IBERTY = $(BINUTILS)/libiberty/
 lib: binutils lib$(NAME).so
 
 binutils:
-	test -d $(BINUTILS) || (wget http://ftp.gnu.org/gnu/binutils/$(NAME).tar.gz && tar -zxf $(BINUTILS).tar.gz)
+	test -d $(BINUTILS) || (wget http://ftp.gnu.org/gnu/binutils/$(BINUTILS).tar.gz && tar -zxf $(BINUTILS).tar.gz)
 	cd $(BFD) && ./configure --enable-targets=all && make LDFLAGS="-all-static" CFLAGS="-fPIC"
 	cd $(OPCODES) && ./configure --enable-targets=all && make LDFLAGS="-all-static" CFLAGS="-fPIC" 
 	cd $(IBERTY) && ./configure && make LDFLAGS="-all-static" CFLAGS="-fPIC" 
