@@ -24,4 +24,4 @@ lib$(NAME).so: $(NAME).o
 clean:
 	$(RM) *.o *.so*
 	$(RM) $(BUILD_DIR)/lib/*.so
-	$(RM) $(BINUTILS)
+	$(RM) -rf $(BINUTILS)
