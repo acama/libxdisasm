@@ -18,6 +18,7 @@ binutils:
 	cd $(BFD) && ./configure --enable-targets=$(TARGETS) && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC"
 	cd $(OPCODES) && ./configure --enable-targets=$(TARGETS) && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC" 
 	cd $(IBERTY) && ./configure && make LDFLAGS="-all-static" CFLAGS="-fPIC" 
+	rm -rf $(BINUTILS).tar.gz
 
 lib$(NAME).so: $(NAME).o
 	$(CC) -shared -Wl,-soname,lib$(NAME).so $^ -o $(BUILD_DIR)/lib/lib$(NAME).so $(OPCODES)/libopcodes.a $(BFD)/libbfd.a $(IBERTY)/libiberty.a -lz
@@ -26,3 +27,4 @@ clean:
 	$(RM) *.o *.so*
 	$(RM) $(BUILD_DIR)/lib/*.so
 	$(RM) -rf $(BINUTILS)
+	$(RM) -rf $(BINUTILS).tar.gz
