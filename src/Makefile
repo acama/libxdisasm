@@ -21,7 +21,7 @@ binutils:
 	rm -rf $(BINUTILS).tar.gz
 
 lib$(NAME).so: $(NAME).o
-	$(CC) -shared -Wl,-soname,lib$(NAME).so $^ -o $(BUILD_DIR)/lib/lib$(NAME).so $(OPCODES)/libopcodes.a $(BFD)/libbfd.a $(IBERTY)/libiberty.a -lz
+	$(CC) -shared -Wl,-soname,lib$(NAME).so $^ -o $(BUILD_DIR)/lib/lib$(NAME).so $(OPCODES)/libopcodes.a $(BFD)/libbfd.a $(IBERTY)/libiberty.a -lz -ldl
 
 clean:
 	$(RM) *.o *.so*

@@ -383,8 +383,6 @@ insn_list * disassemble(unsigned long long vma, char * rawbuf, size_t buflen, in
     max_pos = dis->buffer_vma + length;
     pos = vma;
 
-    
-   
     while(pos < max_pos){
         insn_t * curri = (insn_t *) malloc(sizeof(insn_t));
         if(!curri){
