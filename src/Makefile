@@ -9,7 +9,7 @@ BFD = $(BINUTILS)/bfd/
 OPCODES = $(BINUTILS)/opcodes/
 IBERTY = $(BINUTILS)/libiberty/
 TARGETS = "arm-linux-gnu mips-linux-gnu powerpc-linux-gnu armel-linux-gnu mipsel-linux-gnu powerpc64-linux-gnu x86_64-linux-gnu mips64-linux-gnu mips64el-linux-gnu i386-linux-gnu x86_64-pe arm-pe arm-pei x86_64-darwin i386-darwin"
-CFLAGS := -I$(BFD) -I$(BINUTILS)/include -fPIC -O3 -g -Wall -Werror
+CFLAGS := -I$(BFD) -I$(BINUTILS)/include -fPIC -O3 -Wall -Werror
  
 lib: binutils lib$(NAME).so
 
