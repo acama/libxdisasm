@@ -247,16 +247,19 @@ int init_dis_env(int arch, int bits, int endian){
             if(endian) disas = print_insn_big_arm;
             else disas = print_insn_little_arm;
             if(bits == 16) disas_options = "force-thumb";
+            else if (bits == 64) disas = print_insn_aarch64;
             else disas_options = "no-force-thumb";
             break;
-        case ARCH_mips: // TODO: add mips64 support
+        case ARCH_mips: 
             if(endian) disas = print_insn_big_mips;
             else disas = print_insn_little_mips; 
+            if(bits == 64) dis->mach = bfd_mach_mipsisa64;
             break;
 
-        case ARCH_powerpc: // TODO: add powerpc64 support
+        case ARCH_powerpc: 
             if(endian) disas = print_insn_big_powerpc;
             else disas = print_insn_little_powerpc;
+            if (bits == 64) disas_options = "64";
             dis->arch = bfd_arch_powerpc;       // ppc cares about this
             disassemble_init_for_target(dis);   // otherwise segfault
             break;
