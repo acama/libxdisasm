@@ -18,9 +18,9 @@ lib: binutils lib$(NAME).so
 
 binutils:
 	test -d $(BINUTILS) || (wget http://ftp.gnu.org/gnu/binutils/$(BINUTILS).tar.gz && tar -zxf $(BINUTILS).tar.gz)
-	test -e $(BFD_LIB) || (cd $(BFD) && ./configure --enable-targets=$(TARGETS) && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC")
-	test -e $(OPCODES_LIB) || (cd $(OPCODES) && ./configure --enable-targets=$(TARGETS) && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC")
-	test -e $(IBERTY_LIB) || (cd $(IBERTY) && ./configure && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC")
+	test -e $(BFD_LIB) || (cd $(BFD) && ./configure --enable-targets=$(TARGETS) && make -j 8 LDFLAGS="-all-static" CFLAGS="-fPIC")
+	test -e $(OPCODES_LIB) || (cd $(OPCODES) && ./configure --enable-targets=$(TARGETS) && make -j 8 LDFLAGS="-all-static" CFLAGS="-fPIC")
+	test -e $(IBERTY_LIB) || (cd $(IBERTY) && ./configure && make -j 8 LDFLAGS="-all-static" CFLAGS="-fPIC")
 	rm -rf $(BINUTILS).tar.gz
 
 lib$(NAME).so: $(NAME).o
