@@ -28,3 +28,6 @@ lib$(NAME).so: $(NAME).o
 clean:
 	$(RM) *.o *.so*
 	$(RM) $(BUILD_DIR)/lib/*.so
+	cd $(BFD) && make distclean
+	cd $(OPCODES) && make distclean
+	cd $(IBERTY) && make distclean
