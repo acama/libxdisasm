@@ -12,6 +12,7 @@ notes
 .gdb_history
 
 # build files
+src/binutils/bfd/doc/bfd.info
 src/binutils/bfd/.deps/
 src/binutils/bfd/.libs/
 src/binutils/bfd/Makefile
