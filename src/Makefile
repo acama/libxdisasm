@@ -4,7 +4,7 @@ MINOR := 0
 NAME := xdisasm
 BUILD_DIR ?= ../build
 VERSION := $(MAJOR).$(MINOR)
-BINUTILS = binutils-2.25
+BINUTILS = binutils
 BFD = $(BINUTILS)/bfd/
 OPCODES = $(BINUTILS)/opcodes/
 IBERTY = $(BINUTILS)/libiberty/
@@ -14,10 +14,9 @@ IBERTY_LIB = $(BINUTILS)/libiberty/libiberty.a
 TARGETS = "aarch64-linux-gnu arm-linux-gnu mips-linux-gnu powerpc-linux-gnu armel-linux-gnu mipsel-linux-gnu powerpc64-linux-gnu x86_64-linux-gnu mips64-linux-gnu mips64el-linux-gnu i386-linux-gnu x86_64-pe arm-pe arm-pei x86_64-darwin i386-darwin"
 CFLAGS := -I$(BFD) -I$(BINUTILS)/include -fPIC -O3 -Wall -Werror
  
-lib: binutils lib$(NAME).so
+lib: binutils-libs lib$(NAME).so
 
-binutils:
-	test -d $(BINUTILS) || (wget http://ftp.gnu.org/gnu/binutils/$(BINUTILS).tar.gz && tar -zxf $(BINUTILS).tar.gz)
+binutils-libs:
 	test -e $(BFD_LIB) || (cd $(BFD) && ./configure --enable-targets=$(TARGETS) && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC")
 	test -e $(OPCODES_LIB) || (cd $(OPCODES) && ./configure --enable-targets=$(TARGETS) && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC")
 	test -e $(IBERTY_LIB) || (cd $(IBERTY) && ./configure && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC")
@@ -29,5 +28,3 @@ lib$(NAME).so: $(NAME).o
 clean:
 	$(RM) *.o *.so*
 	$(RM) $(BUILD_DIR)/lib/*.so
-	$(RM) -rf $(BINUTILS)
-	$(RM) -rf $(BINUTILS).tar.gz
