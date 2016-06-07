@@ -28,5 +28,3 @@ lib$(NAME).so: $(NAME).o
 clean:
 	$(RM) *.o *.so*
 	$(RM) $(BUILD_DIR)/lib/*.so
-	$(RM) -rf $(BINUTILS)
-	$(RM) -rf $(BINUTILS).tar.gz
