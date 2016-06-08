@@ -14495,6 +14495,7 @@ print_displacement (char *buf, bfd_vma disp)
 {
   bfd_signed_vma val = disp;
   char tmp[30];
+  char tmp_color[64];
   int i, j = 0;
 
   if (val < 0)
@@ -14529,7 +14530,9 @@ print_displacement (char *buf, bfd_vma disp)
     continue;
   if (tmp[i] == '\0')
     i--;
-  strcpy (buf + j, tmp + i);
+  sprintf(tmp_color, "\e[36m0x%s\e[m", tmp + i);
+  /*strcpy (buf + j, tmp + i);*/
+  strcpy (buf + j, tmp_color);
 }
 
 static void
