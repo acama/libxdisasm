@@ -275,6 +275,7 @@ int init_dis_env(int arch, int bits, int endian){
             if (bits == 64) dis->mach = bfd_mach_riscv64;
             else dis->mach = bfd_mach_riscv32;
             disas = print_insn_riscv;
+            break;
 
         default:
             fprintf(stderr, "libxdisasm: Invalid architecture\n");
