@@ -1742,12 +1742,28 @@ typedef struct
 }
 arm_regname;
 
+/*static const arm_regname regnames[] =*/
+/*{*/
+  /*{ "raw" , "Select raw register names",*/
+    /*{ "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15"}},*/
+  /*{ "gcc",  "Select register names used by GCC",*/
+    /*{ "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "sl",  "fp",  "ip",  "sp",  "lr",  "pc" }},*/
+  /*{ "std",  "Select register names used in ARM's ISA documentation",*/
+    /*{ "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "sp",  "lr",  "pc" }},*/
+  /*{ "apcs", "Select register names used in the APCS",*/
+    /*{ "a1", "a2", "a3", "a4", "v1", "v2", "v3", "v4", "v5", "v6", "sl",  "fp",  "ip",  "sp",  "lr",  "pc" }},*/
+  /*{ "atpcs", "Select register names used in the ATPCS",*/
+    /*{ "a1", "a2", "a3", "a4", "v1", "v2", "v3", "v4", "v5", "v6", "v7",  "v8",  "IP",  "SP",  "LR",  "PC" }},*/
+  /*{ "special-atpcs", "Select special register names used in the ATPCS",*/
+    /*{ "a1", "a2", "a3", "a4", "v1", "v2", "v3", "WR", "v5", "SB", "SL",  "FP",  "IP",  "SP",  "LR",  "PC" }},*/
+/*};*/
+
 static const arm_regname regnames[] =
 {
   { "raw" , "Select raw register names",
     { "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15"}},
   { "gcc",  "Select register names used by GCC",
-    { "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "sl",  "fp",  "ip",  "sp",  "lr",  "pc" }},
+    { "\e[32mr0\e[m","\e[32mr1\e[m","\e[32mr2\e[m","\e[32mr3\e[m","\e[32mr4\e[m","\e[32mr5\e[m","\e[32mr6\e[m","\e[32mr7\e[m","\e[32mr8\e[m","\e[32mr9\e[m","\e[32msl\e[m","\e[32mfp\e[m","\e[32mip\e[m","\e[32msp\e[m","\e[32mlr\e[m","\e[32mpc\e[m" }},
   { "std",  "Select register names used in ARM's ISA documentation",
     { "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "sp",  "lr",  "pc" }},
   { "apcs", "Select register names used in the APCS",
