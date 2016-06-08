@@ -14484,10 +14484,13 @@ print_operand_value (char *buf, int hex, bfd_vma disp)
     }
   else
     {
-      if (hex)
-	sprintf (buf, "0x%x", (unsigned int) disp);
-      else
-	sprintf (buf, "%d", (int) disp);
+        if (hex){
+            /*sprintf (buf, "0x%x", (unsigned int) disp);*/
+            sprintf (buf, "\e[34m0x%x\e[m", (unsigned int) disp);
+        }
+        else{
+            sprintf (buf, "%d", (int) disp);
+        }
     }
 }
 
@@ -15247,7 +15250,7 @@ OP_E_memory (int bytemode, int sizeflag)
 	  if (intel_syntax && riprel)
 	    {
 	      set_op (disp, 1);
-	      oappend (sizeflag & AFLAG ? "rip" : "eip");
+	      oappend (sizeflag & AFLAG ? "\e[32mrip\e[m" : "\e[32meip\e[m");
 	    }
 	  *obufp = '\0';
 	  if (havebase)
