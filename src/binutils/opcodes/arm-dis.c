@@ -1403,11 +1403,11 @@ static const struct opcode16 thumb_opcodes[] =
   {ARM_EXT_V4T, 0x8000, 0xF800, "strh%c\t%0-2r, [%3-5r, #%6-10H]"},
   {ARM_EXT_V4T, 0x8800, 0xF800, "ldrh%c\t%0-2r, [%3-5r, #%6-10H]"},
   /* format 11 */
-  {ARM_EXT_V4T, 0x9000, 0xF800, "str%c\t%8-10r, [\e[32msp\e[m, #%0-7W]"},
-  {ARM_EXT_V4T, 0x9800, 0xF800, "ldr%c\t%8-10r, [\e[32msp\e[m, #%0-7W]"},
+  {ARM_EXT_V4T, 0x9000, 0xF800, "str%c\t%8-10r, [\e[32msp\e[m, \e[36m#%0-7W\e[m]"},
+  {ARM_EXT_V4T, 0x9800, 0xF800, "ldr%c\t%8-10r, [\e[32msp\e[m, \e[36m#%0-7W\e[m]"},
   /* format 12 */
-  {ARM_EXT_V4T, 0xA000, 0xF800, "add%c\t%8-10r, \e[32mpc\e[m, #%0-7W\t; (adr %8-10r, %0-7a)"},
-  {ARM_EXT_V4T, 0xA800, 0xF800, "add%c\t%8-10r, \e[32msp\e[m, #%0-7W"},
+  {ARM_EXT_V4T, 0xA000, 0xF800, "add%c\t%8-10r, \e[32mpc\e[m, \e[36m#%0-7W\e[m\t; (adr %8-10r, %0-7a)"},
+  {ARM_EXT_V4T, 0xA800, 0xF800, "add%c\t%8-10r, \e[32msp\e[m, \e[36m#%0-7W\e[m"},
   /* format 15 */
   {ARM_EXT_V4T, 0xC000, 0xF800, "stmia%c\t%8-10r!, %M"},
   {ARM_EXT_V4T, 0xC800, 0xF800, "ldmia%c\t%8-10r%W, %M"},
