@@ -1360,8 +1360,8 @@ static const struct opcode16 thumb_opcodes[] =
   {ARM_EXT_V4T, 0x4380, 0xFFC0, "bic%C\t%0-2r, %3-5r"},
   {ARM_EXT_V4T, 0x43C0, 0xFFC0, "mvn%C\t%0-2r, %3-5r"},
   /* format 13 */
-  {ARM_EXT_V4T, 0xB000, 0xFF80, "add%c\tsp, #%0-6W"},
-  {ARM_EXT_V4T, 0xB080, 0xFF80, "sub%c\tsp, #%0-6W"},
+  {ARM_EXT_V4T, 0xB000, 0xFF80, "add%c\t\e[32msp\e[m, #%0-6W"},
+  {ARM_EXT_V4T, 0xB080, 0xFF80, "sub%c\t\e[32msp\e[m, #%0-6W"},
   /* format 5 */
   {ARM_EXT_V4T, 0x4700, 0xFF80, "bx%c\t%S%x"},
   {ARM_EXT_V4T, 0x4400, 0xFF00, "add%c\t%D, %S"},
@@ -1393,7 +1393,7 @@ static const struct opcode16 thumb_opcodes[] =
   {ARM_EXT_V4T, 0x3000, 0xF800, "add%C\t%8-10r, #%0-7d"},
   {ARM_EXT_V4T, 0x3800, 0xF800, "sub%C\t%8-10r, #%0-7d"},
   /* format 6 */
-  {ARM_EXT_V4T, 0x4800, 0xF800, "ldr%c\t%8-10r, [pc, #%0-7W]\t; (%0-7a)"},  /* TODO: Disassemble PC relative "LDR rD,=<symbolic>" */
+  {ARM_EXT_V4T, 0x4800, 0xF800, "ldr%c\t%8-10r, [\e[32mpc\e[m, #%0-7W]\t; (%0-7a)"},  /* TODO: Disassemble PC relative "LDR rD,=<symbolic>" */
   /* format 9 */
   {ARM_EXT_V4T, 0x6000, 0xF800, "str%c\t%0-2r, [%3-5r, #%6-10W]"},
   {ARM_EXT_V4T, 0x6800, 0xF800, "ldr%c\t%0-2r, [%3-5r, #%6-10W]"},
@@ -1403,11 +1403,11 @@ static const struct opcode16 thumb_opcodes[] =
   {ARM_EXT_V4T, 0x8000, 0xF800, "strh%c\t%0-2r, [%3-5r, #%6-10H]"},
   {ARM_EXT_V4T, 0x8800, 0xF800, "ldrh%c\t%0-2r, [%3-5r, #%6-10H]"},
   /* format 11 */
-  {ARM_EXT_V4T, 0x9000, 0xF800, "str%c\t%8-10r, [sp, #%0-7W]"},
-  {ARM_EXT_V4T, 0x9800, 0xF800, "ldr%c\t%8-10r, [sp, #%0-7W]"},
+  {ARM_EXT_V4T, 0x9000, 0xF800, "str%c\t%8-10r, [\e[32msp\e[m, #%0-7W]"},
+  {ARM_EXT_V4T, 0x9800, 0xF800, "ldr%c\t%8-10r, [\e[32msp\e[m, #%0-7W]"},
   /* format 12 */
-  {ARM_EXT_V4T, 0xA000, 0xF800, "add%c\t%8-10r, pc, #%0-7W\t; (adr %8-10r, %0-7a)"},
-  {ARM_EXT_V4T, 0xA800, 0xF800, "add%c\t%8-10r, sp, #%0-7W"},
+  {ARM_EXT_V4T, 0xA000, 0xF800, "add%c\t%8-10r, \e[32mpc\e[m, #%0-7W\t; (adr %8-10r, %0-7a)"},
+  {ARM_EXT_V4T, 0xA800, 0xF800, "add%c\t%8-10r, \e[32msp\e[m, #%0-7W"},
   /* format 15 */
   {ARM_EXT_V4T, 0xC000, 0xF800, "stmia%c\t%8-10r!, %M"},
   {ARM_EXT_V4T, 0xC800, 0xF800, "ldmia%c\t%8-10r%W, %M"},
@@ -2535,7 +2535,7 @@ print_arm_address (bfd_vma pc, struct disassemble_info *info, long given)
 	  /* Pre-indexed.  Elide offset of positive zero when
 	     non-writeback.  */
 	  if (WRITEBACK_BIT_SET || NEGATIVE_BIT_SET || offset)
-	    func (stream, ", \e[32m#%s%d\e[m", NEGATIVE_BIT_SET ? "-" : "", (int) offset);
+	    func (stream, ", \e[36m#%s%d\e[m", NEGATIVE_BIT_SET ? "-" : "", (int) offset);
 
 	  if (NEGATIVE_BIT_SET)
 	    offset = -offset;
@@ -2550,7 +2550,7 @@ print_arm_address (bfd_vma pc, struct disassemble_info *info, long given)
 	}
       else  /* Post indexed.  */
 	{
-	  func (stream, "], \e[32m#%s%d\e[m", NEGATIVE_BIT_SET ? "-" : "", (int) offset);
+	  func (stream, "], \e[36m#%s%d\e[m", NEGATIVE_BIT_SET ? "-" : "", (int) offset);
 
 	  /* Ie ignore the offset.  */
 	  offset = pc + 8;
@@ -2572,7 +2572,7 @@ print_arm_address (bfd_vma pc, struct disassemble_info *info, long given)
 	      /* Elide offset of positive zero when non-writeback.  */
 	      offset = given & 0xfff;
 	      if (WRITEBACK_BIT_SET || NEGATIVE_BIT_SET || offset)
-		func (stream, ", \e[32m#%s%d\e[m", NEGATIVE_BIT_SET ? "-" : "", (int) offset);
+		func (stream, ", \e[36m#%s%d\e[m", NEGATIVE_BIT_SET ? "-" : "", (int) offset);
 	    }
 	  else
 	    {
@@ -2589,7 +2589,7 @@ print_arm_address (bfd_vma pc, struct disassemble_info *info, long given)
 	    {
 	      /* Always show offset.  */
 	      offset = given & 0xfff;
-	      func (stream, "], \e[32m#%s%d\e[m",
+	      func (stream, "], \e[36m#%s%d\e[m",
 		    NEGATIVE_BIT_SET ? "-" : "", (int) offset);
 	    }
 	  else
@@ -4022,7 +4022,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 		  imm12 |= (given & 0x000000ffu);
 		  imm12 |= (given & 0x00007000u) >> 4;
 		  imm12 |= (given & 0x04000000u) >> 15;
-		  func (stream, "#%u", imm12);
+		  func (stream, "\e[36m#%u\e[m", imm12);
 		  value_in_comment = imm12;
 		}
 		break;
@@ -4047,7 +4047,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 		      imm8 = (bits & 0x07f) | 0x80;
 		      imm  = (((imm8 << (32 - mod)) | (imm8 >> mod)) & 0xffffffff);
 		    }
-		  func (stream, "#%u", imm);
+		  func (stream, "\e[36m#%u\e[m", imm);
 		  value_in_comment = imm;
 		}
 		break;
@@ -4060,7 +4060,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 		  imm |= (given & 0x00007000u) >> 4;
 		  imm |= (given & 0x04000000u) >> 15;
 		  imm |= (given & 0x000f0000u) >> 4;
-		  func (stream, "#%u", imm);
+		  func (stream, "\e[36m#%u\e[m", imm);
 		  value_in_comment = imm;
 		}
 		break;
@@ -4072,7 +4072,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 		  imm |= (given & 0x000f0000u) >> 16;
 		  imm |= (given & 0x00000ff0u) >> 0;
 		  imm |= (given & 0x0000000fu) << 12;
-		  func (stream, "#%u", imm);
+		  func (stream, "\e[36m#%u\e[m", imm);
 		  value_in_comment = imm;
 		}
 		break;
@@ -4083,7 +4083,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 
 		  imm |= (given & 0x000f0000u) >> 4;
 		  imm |= (given & 0x00000fffu) >> 0;
-		  func (stream, "#%u", imm);
+		  func (stream, "\e[36m#%u\e[m", imm);
 		  value_in_comment = imm;
 		}
 		break;
@@ -4094,7 +4094,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 
 		  imm |= (given & 0x00000fffu);
 		  imm |= (given & 0x000f0000u) >> 4;
-		  func (stream, "#%u", imm);
+		  func (stream, "\e[36m#%u\e[m", imm);
 		  value_in_comment = imm;
 		}
 		break;
@@ -4112,26 +4112,26 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 		    {
 		    case 0:
 		      if (imm > 0)
-			func (stream, ", lsl #%u", imm);
+			func (stream, ", lsl \e[36m#%u\e[m", imm);
 		      break;
 
 		    case 1:
 		      if (imm == 0)
 			imm = 32;
-		      func (stream, ", lsr #%u", imm);
+		      func (stream, ", lsr \e[36m#%u\e[m", imm);
 		      break;
 
 		    case 2:
 		      if (imm == 0)
 			imm = 32;
-		      func (stream, ", asr #%u", imm);
+		      func (stream, ", asr \e[36m#%u\e[m", imm);
 		      break;
 
 		    case 3:
 		      if (imm == 0)
 			func (stream, ", rrx");
 		      else
-			func (stream, ", ror #%u", imm);
+			func (stream, ", ror \e[36m#%u\e[m", imm);
 		    }
 		}
 		break;
@@ -4162,7 +4162,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 
 		      func (stream, ", %s", arm_regnames[Rm]);
 		      if (sh)
-			func (stream, ", lsl #%u", sh);
+			func (stream, ", lsl \e[36m#%u\e[m", sh);
 		      func (stream, "]");
 		      break;
 		    }
@@ -4202,11 +4202,11 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 		    }
 
 		  if (postind)
-		    func (stream, "], #%d", (int) offset);
+		    func (stream, "], \e[36m#%d\e[m", (int) offset);
 		  else
 		    {
 		      if (offset)
-			func (stream, ", #%d", (int) offset);
+			func (stream, ", \e[36m#%d\e[m", (int) offset);
 		      func (stream, writeback ? "]!" : "]");
 		    }
 
@@ -4364,9 +4364,9 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 		  shift |= (given & 0x000000c0u) >> 6;
 		  shift |= (given & 0x00007000u) >> 10;
 		  if (WRITEBACK_BIT_SET)
-		    func (stream, ", asr #%u", shift);
+		    func (stream, ", asr \e[36m#%u\e[m", shift);
 		  else if (shift)
-		    func (stream, ", lsl #%u", shift);
+		    func (stream, ", lsl \e[36m#%u\e[m", shift);
 		  /* else print nothing - lsl #0 */
 		}
 		break;
@@ -4376,7 +4376,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 		  unsigned int rot = (given & 0x00000030) >> 4;
 
 		  if (rot)
-		    func (stream, ", ror #%u", rot * 8);
+		    func (stream, ", ror \e[36m#%u\e[m", rot * 8);
 		}
 		break;
 
@@ -4387,7 +4387,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 		      {
 			case 0xf: func (stream, "sy"); break;
 			default:
-			  func (stream, "#%d", (int) given & 0xf);
+			  func (stream, "\e[36m#%d\e[m", (int) given & 0xf);
 			      break;
 		      }
 		  }
@@ -4397,7 +4397,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 		    if (opt != NULL)
 		      func (stream, "%s", opt);
 		    else
-		      func (stream, "#%d", (int) given & 0xf);
+		      func (stream, "\e[36m#%d\e[m", (int) given & 0xf);
 		   }
 		break;
 
@@ -4538,7 +4538,7 @@ print_insn_thumb32 (bfd_vma pc, struct disassemble_info *info, long given)
 	  }
 
 	if (value_in_comment > 32 || value_in_comment < -16)
-	  func (stream, "\t; 0x%lx", value_in_comment);
+	  func (stream, "\t; \e[2m0x%lx\e[m", value_in_comment);
 
 	if (is_unpredictable)
 	  func (stream, UNPREDICTABLE_INSTRUCTION);
