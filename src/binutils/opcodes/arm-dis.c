@@ -1388,17 +1388,17 @@ static const struct opcode16 thumb_opcodes[] =
   {ARM_EXT_V4T, 0x0800, 0xF800, "lsr%C\t%0-2r, %3-5r, %s"},
   {ARM_EXT_V4T, 0x1000, 0xF800, "asr%C\t%0-2r, %3-5r, %s"},
   /* format 3 */
-  {ARM_EXT_V4T, 0x2000, 0xF800, "mov%C\t%8-10r, #%0-7d"},
-  {ARM_EXT_V4T, 0x2800, 0xF800, "cmp%c\t%8-10r, #%0-7d"},
-  {ARM_EXT_V4T, 0x3000, 0xF800, "add%C\t%8-10r, #%0-7d"},
-  {ARM_EXT_V4T, 0x3800, 0xF800, "sub%C\t%8-10r, #%0-7d"},
+  {ARM_EXT_V4T, 0x2000, 0xF800, "mov%C\t%8-10r, \e[36m#%0-7d\e[m"},
+  {ARM_EXT_V4T, 0x2800, 0xF800, "cmp%c\t%8-10r, \e[36m#%0-7d\e[m"},
+  {ARM_EXT_V4T, 0x3000, 0xF800, "add%C\t%8-10r, \e[36m#%0-7d\e[m"},
+  {ARM_EXT_V4T, 0x3800, 0xF800, "sub%C\t%8-10r, \e[36m#%0-7d\e[m"},
   /* format 6 */
-  {ARM_EXT_V4T, 0x4800, 0xF800, "ldr%c\t%8-10r, [\e[32mpc\e[m, #%0-7W]\t; (%0-7a)"},  /* TODO: Disassemble PC relative "LDR rD,=<symbolic>" */
+  {ARM_EXT_V4T, 0x4800, 0xF800, "ldr%c\t%8-10r, [\e[32mpc\e[m, \e[36m#%0-7W\e[m]\t; (%0-7a)"},  /* TODO: Disassemble PC relative "LDR rD,=<symbolic>" */
   /* format 9 */
-  {ARM_EXT_V4T, 0x6000, 0xF800, "str%c\t%0-2r, [%3-5r, #%6-10W]"},
-  {ARM_EXT_V4T, 0x6800, 0xF800, "ldr%c\t%0-2r, [%3-5r, #%6-10W]"},
-  {ARM_EXT_V4T, 0x7000, 0xF800, "strb%c\t%0-2r, [%3-5r, #%6-10d]"},
-  {ARM_EXT_V4T, 0x7800, 0xF800, "ldrb%c\t%0-2r, [%3-5r, #%6-10d]"},
+  {ARM_EXT_V4T, 0x6000, 0xF800, "str%c\t%0-2r, [%3-5r, \e[36m#%6-10W\e[m]"},
+  {ARM_EXT_V4T, 0x6800, 0xF800, "ldr%c\t%0-2r, [%3-5r, \e[36m#%6-10W\e[m]"},
+  {ARM_EXT_V4T, 0x7000, 0xF800, "strb%c\t%0-2r, [%3-5r, \e[36m#%6-10d\e[m]"},
+  {ARM_EXT_V4T, 0x7800, 0xF800, "ldrb%c\t%0-2r, [%3-5r, \e[36m#%6-10d\e[m]"},
   /* format 10 */
   {ARM_EXT_V4T, 0x8000, 0xF800, "strh%c\t%0-2r, [%3-5r, #%6-10H]"},
   {ARM_EXT_V4T, 0x8800, 0xF800, "ldrh%c\t%0-2r, [%3-5r, #%6-10H]"},
