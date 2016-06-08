@@ -1906,9 +1906,9 @@ arm_decode_shift (long given, fprintf_ftype func, void *stream,
 	    }
 
 	  if (print_shift)
-	    func (stream, ", %s #%d", arm_shift[shift], amount);
+	    func (stream, ", %s \e[36m#%d\e[m", arm_shift[shift], amount);
 	  else
-	    func (stream, ", #%d", amount);
+	    func (stream, ", \e[36m#%d\e[m", amount);
 	}
       else if ((given & 0x80) == 0x80)
 	func (stream, "\t; <illegal shifter operand>");
@@ -2046,7 +2046,7 @@ print_insn_coprocessor (bfd_vma pc,
 		    if (PRE_BIT_SET)
 		      {
 			if (offset)
-			  func (stream, ", #%d]%s",
+			  func (stream, ", \e[36m#%d\e[m]%s",
 				(int) offset,
 				WRITEBACK_BIT_SET ? "!" : "");
 			else if (NEGATIVE_BIT_SET)
@@ -2061,7 +2061,7 @@ print_insn_coprocessor (bfd_vma pc,
 			if (WRITEBACK_BIT_SET)
 			  {
 			    if (offset)
-			      func (stream, ", #%d", (int) offset);
+			      func (stream, ", \e[36m#%d\e[m", (int) offset);
 			    else if (NEGATIVE_BIT_SET)
 			      func (stream, ", #-0");
 			  }
@@ -2434,12 +2434,12 @@ print_insn_coprocessor (bfd_vma pc,
 		      if (offset)
 			{
 			  if (PRE_BIT_SET)
-			    func (stream, ", #%s%d]%s",
+			    func (stream, ", \e[36m#%s%d\e[m]%s",
 				  NEGATIVE_BIT_SET ? "-" : "",
 				  offset * multiplier,
 				  WRITEBACK_BIT_SET ? "!" : "");
 			  else
-			    func (stream, "], #%s%d",
+			    func (stream, "], \e[36m#%s%d\e[m",
 				  NEGATIVE_BIT_SET ? "-" : "",
 				  offset * multiplier);
 			}
@@ -2462,7 +2462,7 @@ print_insn_coprocessor (bfd_vma pc,
 			case 3:
 			  func (stream, "[%s], %c%s", rn, ubit ? '+' : '-', rm);
 			  if (imm4)
-			    func (stream, ", lsl #%d", imm4);
+			    func (stream, ", lsl \e[36m#%d\e[m", imm4);
 			  break;
 
 			case 4:
@@ -2471,7 +2471,7 @@ print_insn_coprocessor (bfd_vma pc,
 			case 7:
 			  func (stream, "[%s, %c%s", rn, ubit ? '+' : '-', rm);
 			  if (imm4 > 0)
-			    func (stream, ", lsl #%d", imm4);
+			    func (stream, ", lsl \e[36m#%d\e[m", imm4);
 			  func (stream, "]");
 			  if (puw_bits == 5 || puw_bits == 7)
 			    func (stream, "!");
@@ -2487,7 +2487,7 @@ print_insn_coprocessor (bfd_vma pc,
 		    {
 		      long imm5;
 		      imm5 = ((given & 0x100) >> 4) | (given & 0xf);
-		      func (stream, "%ld", (imm5 == 0) ? 32 : imm5);
+		      func (stream, "\e[36m%ld\e[m", (imm5 == 0) ? 32 : imm5);
 		    }
 		    break;
 
@@ -2501,7 +2501,7 @@ print_insn_coprocessor (bfd_vma pc,
 	}
 
       if (value_in_comment > 32 || value_in_comment < -16)
-	func (stream, "\t; 0x%lx", (value_in_comment & 0xffffffffUL));
+	func (stream, "\t; \e[2m0x%lx\e[m", (value_in_comment & 0xffffffffUL));
 
       if (is_unpredictable)
 	func (stream, UNPREDICTABLE_INSTRUCTION);
@@ -3070,7 +3070,7 @@ print_insn_neon (struct disassemble_info *info, long given, bfd_boolean thumb)
 	    }
 
 	  if (value_in_comment > 32 || value_in_comment < -16)
-	    func (stream, "\t; 0x%lx", value_in_comment);
+	    func (stream, "\t; \e[2m0x%lx\e[m", value_in_comment);
 
 	  if (is_unpredictable)
 	    func (stream, UNPREDICTABLE_INSTRUCTION);
