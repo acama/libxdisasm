@@ -11,7 +11,7 @@ IBERTY = $(BINUTILS)/libiberty/
 BFD_LIB = $(BINUTILS)/bfd/libbfd.a
 OPCODES_LIB = $(BINUTILS)/opcodes/libopcodes.a
 IBERTY_LIB = $(BINUTILS)/libiberty/libiberty.a
-TARGETS = "aarch64-linux-gnu arm-linux-gnu mips-linux-gnu powerpc-linux-gnu armel-linux-gnu mipsel-linux-gnu powerpc64-linux-gnu x86_64-linux-gnu mips64-linux-gnu mips64el-linux-gnu i386-linux-gnu x86_64-pe arm-pe arm-pei x86_64-darwin i386-darwin riscv64-unknown-linux-gnu"
+TARGETS = "aarch64-linux-gnu arm-linux-gnu mips-linux-gnu powerpc-linux-gnu armel-linux-gnu mipsel-linux-gnu powerpc64-linux-gnu x86_64-linux-gnu mips64-linux-gnu mips64el-linux-gnu i386-linux-gnu x86_64-pe arm-pe arm-pei x86_64-darwin i386-darwin riscv64-unknown-linux-gnu riscv32-unknown-linux-gnu"
 CFLAGS := -I$(BFD) -I$(BINUTILS)/include -fPIC -O3 -Wall -Werror
  
 lib: binutils-libs lib$(NAME).so

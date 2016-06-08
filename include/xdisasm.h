@@ -27,6 +27,7 @@
 #define ARCH_mips 2
 #define ARCH_powerpc 3
 #define ARCH_x86 4
+#define ARCH_riscv 6
 
 // instruction structure
 typedef struct insn_t{
