@@ -3220,10 +3220,10 @@ print_insn_arm (bfd_vma pc, struct disassemble_info *info, long given)
 			    {
 			      /* Elide positive zero offset.  */
 			      if (offset || NEGATIVE_BIT_SET)
-				func (stream, "[pc, #%s%d]\t; ",
+				func (stream, "[\e[32mpc\e[m, \e[36m#%s%d\e[m]\t; ",
 				      NEGATIVE_BIT_SET ? "-" : "", (int) offset);
 			      else
-				func (stream, "[pc]\t; ");
+				func (stream, "[\e[32mpc\e[m]\t; ");
 			      if (NEGATIVE_BIT_SET)
 				offset = -offset;
 			      info->print_address_func (offset + pc + 8, info);
@@ -3231,7 +3231,7 @@ print_insn_arm (bfd_vma pc, struct disassemble_info *info, long given)
 			  else
 			    {
 			      /* Always show the offset.  */
-			      func (stream, "[pc], #%s%d",
+			      func (stream, "[\e[32mpc\e[m], \e[36m#%s%d\e[m",
 				    NEGATIVE_BIT_SET ? "-" : "", (int) offset);
 			      if (! allow_unpredictable)
 				is_unpredictable = TRUE;
@@ -3252,7 +3252,7 @@ print_insn_arm (bfd_vma pc, struct disassemble_info *info, long given)
 				     positive zero.  */
 				  if (WRITEBACK_BIT_SET || NEGATIVE_BIT_SET
 				      || offset)
-				    func (stream, ", #%s%d",
+				    func (stream, ", \e[36m#%s%d\e[m",
 					  NEGATIVE_BIT_SET ? "-" : "", offset);
 
 				  if (NEGATIVE_BIT_SET)
@@ -3284,7 +3284,7 @@ print_insn_arm (bfd_vma pc, struct disassemble_info *info, long given)
 				{
 				  /* Immediate Post-indexed.  */
 				  /* PR 10924: Offset must be printed, even if it is zero.  */
-				  func (stream, "], #%s%d",
+				  func (stream, "], \e[36m#%s%d\e[m",
 					NEGATIVE_BIT_SET ? "-" : "", offset);
 				  if (NEGATIVE_BIT_SET)
 				    offset = -offset;
@@ -3372,9 +3372,9 @@ print_insn_arm (bfd_vma pc, struct disassemble_info *info, long given)
 			      break;
 
 			  if (i != rotate)
-			    func (stream, "#%d, %d", immed, rotate);
+			    func (stream, "\e[36m#%d\e[m, %d", immed, rotate);
 			  else
-			    func (stream, "#%d", a);
+			    func (stream, "\e[36m#%d\e[m", a);
 			  value_in_comment = a;
 			}
 		      else
@@ -3410,7 +3410,7 @@ print_insn_arm (bfd_vma pc, struct disassemble_info *info, long given)
 			if (PRE_BIT_SET)
 			  {
 			    if (offset)
-			      func (stream, ", #%d]%s",
+			      func (stream, ", \e[36m#%d\e[m]%s",
 				    (int) value_in_comment,
 				    WRITEBACK_BIT_SET ? "!" : "");
 			    else
@@ -3493,7 +3493,7 @@ print_insn_arm (bfd_vma pc, struct disassemble_info *info, long given)
 			    {
 			    case 0xf: func (stream, "sy"); break;
 			    default:
-			      func (stream, "#%d", (int) given & 0xf);
+			      func (stream, "\e[36m#%d\e[m", (int) given & 0xf);
 			      break;
 			    }
 			} 
@@ -3503,7 +3503,7 @@ print_insn_arm (bfd_vma pc, struct disassemble_info *info, long given)
 			  if (opt != NULL)
 			    func (stream, "%s", opt);
 			  else
-			      func (stream, "#%d", (int) given & 0xf);
+			      func (stream, "\e[36m#%d\e[m", (int) given & 0xf);
 			}
 		      break;
 
@@ -3641,7 +3641,7 @@ print_insn_arm (bfd_vma pc, struct disassemble_info *info, long given)
 			  long lo = (given & 0x00000fff);
 			  long imm16 = hi | lo;
 
-			  func (stream, "#%lu", imm16);
+			  func (stream, "\e[36m#%lu\e[m", imm16);
 			  value_in_comment = imm16;
 			}
 			break;
@@ -3827,7 +3827,7 @@ print_insn_thumb16 (bfd_vma pc, struct disassemble_info *info, long given)
 		  long imm = (given & 0x07c0) >> 6;
 		  if (imm == 0)
 		    imm = 32;
-		  func (stream, "#%ld", imm);
+		  func (stream, "\e[36m#%ld\e[m#", imm);
 		}
 		break;
 
