@@ -14655,6 +14655,7 @@ OP_E_register (int bytemode, int sizeflag)
 {
   int reg = modrm.rm;
   const char **names;
+  char color_reg[64] = {0};
 
   USED_REX (REX_B);
   if ((rex & REX_B))
@@ -14733,7 +14734,10 @@ OP_E_register (int bytemode, int sizeflag)
       oappend (INTERNAL_DISASSEMBLER_ERROR);
       return;
     }
-  oappend (names[reg]);
+
+  sprintf(color_reg, "\e[32m%s\e[m", names[reg]);
+  //oappend (names[reg]);
+  oappend (color_reg);
 }
 
 static void
