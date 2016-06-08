@@ -271,6 +271,12 @@ int init_dis_env(int arch, int bits, int endian){
             disas = print_insn_i386_intel;
             break;
 
+        case ARCH_riscv:
+            if (bits == 64) dis->mach = bfd_mach_riscv64;
+            else dis->mach = bfd_mach_riscv32;
+            disas = print_insn_riscv;
+            break;
+
         default:
             fprintf(stderr, "libxdisasm: Invalid architecture\n");
             return -1;

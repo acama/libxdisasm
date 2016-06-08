@@ -12,6 +12,12 @@ notes
 .gdb_history
 
 # build files
+src/binutils/bfd/cpu-riscv.lo
+src/binutils/bfd/elf32-riscv.lo
+src/binutils/bfd/elf64-riscv.lo
+src/binutils/bfd/elfxx-riscv.lo
+src/binutils/opcodes/riscv-dis.lo
+src/binutils/opcodes/riscv-opc.lo
 src/binutils/bfd/doc/bfd.info
 src/binutils/bfd/.deps/
 src/binutils/bfd/.libs/
