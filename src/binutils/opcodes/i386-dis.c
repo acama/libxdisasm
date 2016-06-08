@@ -14439,12 +14439,15 @@ print_operand_value (char *buf, int hex, bfd_vma disp)
       if (hex)
 	{
 	  char tmp[30];
+      char tmp_color[64];
 	  int i;
-	  buf[0] = '0';
-	  buf[1] = 'x';
+	  /*buf[0] = '0';*/
+	  /*buf[1] = 'x';*/
 	  sprintf_vma (tmp, disp);
 	  for (i = 0; tmp[i] == '0' && tmp[i + 1]; i++);
-	  strcpy (buf + 2, tmp + i);
+      snprintf(tmp_color, sizeof(tmp_color), "\e[36m0x%s\e[m", tmp + i);
+	  /*strcpy (buf + 2, tmp + i);*/
+	  strcpy (buf, tmp_color);
 	}
       else
 	{
@@ -14522,15 +14525,15 @@ print_displacement (char *buf, bfd_vma disp)
 	}
     }
 
-  buf[j++] = '0';
-  buf[j++] = 'x';
+  /*buf[j++] = '0';*/
+  /*buf[j++] = 'x';*/
 
   sprintf_vma (tmp, (bfd_vma) val);
   for (i = 0; tmp[i] == '0'; i++)
     continue;
   if (tmp[i] == '\0')
     i--;
-  sprintf(tmp_color, "\e[36m0x%s\e[m", tmp + i);
+  snprintf(tmp_color, sizeof(tmp_color), "\e[36m0x%s\e[m", tmp + i);
   /*strcpy (buf + j, tmp + i);*/
   strcpy (buf + j, tmp_color);
 }
