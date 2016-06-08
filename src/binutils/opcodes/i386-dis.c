@@ -12492,17 +12492,23 @@ prefix_name (int pref, int sizeflag)
     case 0xf0:
       return "lock";
     case 0x2e:
-      return "cs";
+      /*return "cs";*/
+      return "\e[32mcs\e[m";
     case 0x36:
-      return "ss";
+      /*return "ss";*/
+      return "\e[32mss\e[m";
     case 0x3e:
-      return "ds";
+      /*return "ds";*/
+      return "\e[32mds\e[m";
     case 0x26:
-      return "es";
+      /*return "es";*/
+      return "\e[32mes\e[m";
     case 0x64:
-      return "fs";
+      /*return "fs";*/
+      return "\e[32mfs\e[m";
     case 0x65:
-      return "gs";
+      /*return "gs";*/
+      return "\e[32mgs\e[m";
     case 0x66:
       return (sizeflag & DFLAG) ? "data16" : "data32";
     case 0x67:
@@ -14486,7 +14492,7 @@ print_operand_value (char *buf, int hex, bfd_vma disp)
     {
         if (hex){
             /*sprintf (buf, "0x%x", (unsigned int) disp);*/
-            sprintf (buf, "\e[34m0x%x\e[m", (unsigned int) disp);
+            sprintf (buf, "\e[36m0x%x\e[m", (unsigned int) disp);
         }
         else{
             sprintf (buf, "%d", (int) disp);
@@ -15671,7 +15677,7 @@ OP_IMREG (int code, int sizeflag)
     {
     case indir_dx_reg:
       if (intel_syntax)
-	s = "dx";
+	s = "\e[32mdx\e[m"; //s = "dx";
       else
 	s = "(%dx)";
       break;
