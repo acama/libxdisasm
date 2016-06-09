@@ -27,7 +27,7 @@
 #include "opintl.h"
 #include "opcode/ppc.h"
 
-#define COLREG "\e[32m"
+#define COLOREG "\e[32m"
 #define COLIM "\e[36m"
 #define COLDIM "\e[2m"
 #define COLEND "\e[m"
@@ -670,7 +670,7 @@ print_insn_powerpc (bfd_vma memaddr,
 	  /* Print the operand as directed by the flags.  */
 	  if ((operand->flags & PPC_OPERAND_GPR) != 0
 	      || ((operand->flags & PPC_OPERAND_GPR_0) != 0 && value != 0))
-	    (*info->fprintf_func) (info->stream, COLORED "r%ld" COLEND, value);
+	    (*info->fprintf_func) (info->stream, COLOREG "r%ld" COLEND, value);
 	  else if ((operand->flags & PPC_OPERAND_FPR) != 0)
 	    (*info->fprintf_func) (info->stream, COLOREG "f%ld" COLEND, value);
 	  else if ((operand->flags & PPC_OPERAND_VR) != 0)
