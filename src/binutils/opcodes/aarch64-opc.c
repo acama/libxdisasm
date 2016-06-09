@@ -2326,6 +2326,7 @@ print_register_offset_address (char *buf, size_t size,
    issuer, which is the reason why it lives in this file.  */
 
 #define COLIM "\e[36m"
+#define COLDIM "\e[2m"
 #define COLEND "\e[m"
 
 void
@@ -2492,11 +2493,11 @@ aarch64_print_operand (char *buf, size_t size, bfd_vma pc,
 	case 4:	/* e.g. MOV Wd, #<imm32>.  */
 	    {
 	      int imm32 = opnd->imm.value;
-	      snprintf (buf, size, COLIM "#0x%-20x\t// " COLEND COLIM "#%d" COLEND, imm32, imm32);
+	      snprintf (buf, size, COLIM "#0x%-20x" COLEND COLDIM "\t// "  "#%d" COLEND, imm32, imm32);
 	    }
 	  break;
 	case 8:	/* e.g. MOV Xd, #<imm64>.  */
-	  snprintf (buf, size, COLIM "#0x%-20" PRIx64 COLEND "\t// " COLIM "#%" PRIi64 COLEND,
+	  snprintf (buf, size, COLIM "#0x%-20" PRIx64 COLEND COLDIM "\t// " "#%" PRIi64 COLEND,
 		    opnd->imm.value, opnd->imm.value);
 	  break;
 	default: assert (0);
