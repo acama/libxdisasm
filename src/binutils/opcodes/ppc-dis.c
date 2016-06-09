@@ -27,6 +27,11 @@
 #include "opintl.h"
 #include "opcode/ppc.h"
 
+#define COLOREG "\e[32m"
+#define COLIM "\e[36m"
+#define COLDIM "\e[2m"
+#define COLEND "\e[m"
+
 /* This file provides several disassembler functions, all of which use
    the disassembler interface defined in dis-asm.h.  Several functions
    are provided because this file handles disassembly for the PowerPC
@@ -665,27 +670,27 @@ print_insn_powerpc (bfd_vma memaddr,
 	  /* Print the operand as directed by the flags.  */
 	  if ((operand->flags & PPC_OPERAND_GPR) != 0
 	      || ((operand->flags & PPC_OPERAND_GPR_0) != 0 && value != 0))
-	    (*info->fprintf_func) (info->stream, "r%ld", value);
+	    (*info->fprintf_func) (info->stream, COLOREG "r%ld" COLEND, value);
 	  else if ((operand->flags & PPC_OPERAND_FPR) != 0)
-	    (*info->fprintf_func) (info->stream, "f%ld", value);
+	    (*info->fprintf_func) (info->stream, COLOREG "f%ld" COLEND, value);
 	  else if ((operand->flags & PPC_OPERAND_VR) != 0)
-	    (*info->fprintf_func) (info->stream, "v%ld", value);
+	    (*info->fprintf_func) (info->stream, COLOREG "v%ld" COLEND, value);
 	  else if ((operand->flags & PPC_OPERAND_VSR) != 0)
-	    (*info->fprintf_func) (info->stream, "vs%ld", value);
+	    (*info->fprintf_func) (info->stream, COLOREG "vs%ld" COLEND, value);
 	  else if ((operand->flags & PPC_OPERAND_RELATIVE) != 0)
 	    (*info->print_address_func) (memaddr + value, info);
 	  else if ((operand->flags & PPC_OPERAND_ABSOLUTE) != 0)
 	    (*info->print_address_func) ((bfd_vma) value & 0xffffffff, info);
 	  else if ((operand->flags & PPC_OPERAND_FSL) != 0) 
-	    (*info->fprintf_func) (info->stream, "fsl%ld", value);
+	    (*info->fprintf_func) (info->stream, COLOREG "fsl%ld" COLEND, value);
 	  else if ((operand->flags & PPC_OPERAND_FCR) != 0)
-	    (*info->fprintf_func) (info->stream, "fcr%ld", value);
+	    (*info->fprintf_func) (info->stream, COLOREG "fcr%ld" COLEND, value);
 	  else if ((operand->flags & PPC_OPERAND_UDI) != 0)
-	    (*info->fprintf_func) (info->stream, "%ld", value);
+	    (*info->fprintf_func) (info->stream, COLOREG "%ld" COLEND, value);
 	  else if ((operand->flags & PPC_OPERAND_CR_REG) != 0
 		   && (((dialect & PPC_OPCODE_PPC) != 0)
 		       || ((dialect & PPC_OPCODE_VLE) != 0)))
-	    (*info->fprintf_func) (info->stream, "cr%ld", value);
+	    (*info->fprintf_func) (info->stream, COLOREG "cr%ld" COLEND, value);
 	  else if (((operand->flags & PPC_OPERAND_CR_BIT) != 0)
 		   && (((dialect & PPC_OPCODE_PPC) != 0)
 		       || ((dialect & PPC_OPCODE_VLE) != 0)))
@@ -696,12 +701,12 @@ print_insn_powerpc (bfd_vma memaddr,
 
 	      cr = value >> 2;
 	      if (cr != 0)
-		(*info->fprintf_func) (info->stream, "4*cr%d+", cr);
+		(*info->fprintf_func) (info->stream, "4*"COLOREG"cr%d"COLEND"+", cr);
 	      cc = value & 3;
 	      (*info->fprintf_func) (info->stream, "%s", cbnames[cc]);
 	    }
 	  else
-	    (*info->fprintf_func) (info->stream, "%d", (int) value);
+	    (*info->fprintf_func) (info->stream, COLIM "%d" COLEND, (int) value);
 
 	  if (need_paren)
 	    {
