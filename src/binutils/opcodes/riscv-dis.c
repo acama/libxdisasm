@@ -31,6 +31,11 @@
 #include <stdint.h>
 #include <ctype.h>
 
+#define COLREG "\e[32m"
+#define COLIM "\e[36m"
+#define COLDIM "\e[2m"
+#define COLEND "\e[m"
+
 struct riscv_private_data
 {
   bfd_vma gp;
