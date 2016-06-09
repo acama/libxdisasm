@@ -30,6 +30,9 @@
 
 #define MAX_INS_STRSIZE 2048
 
+#define COLADDR "\e[34m"
+#define COLEND "\e[m"
+
 char curr_insn_str[MAX_INS_STRSIZE] = {0};
 char * currptr = curr_insn_str;
 disassembler_ftype disas = NULL; // disassembler 
@@ -226,7 +229,7 @@ void copy_bytes(char * dest, char * src, unsigned int siz){
 // bfd_vma, struct disassemble_info * -> void
 // Formatter for address in memory referencing instructions
 void override_print_address(bfd_vma addr, struct disassemble_info *info){
-    sprintf(currptr, "%p", (void *) addr);
+    sprintf(currptr, COLADDR "%p" COLEND, (void *) addr);
 }
 
 // void*, char * -> int
