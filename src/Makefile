@@ -24,6 +24,7 @@ binutils-libs:
 
 lib$(NAME).so: $(NAME).o
 	$(CC) -shared -Wl,-soname,lib$(NAME).so $^ -o $(BUILD_DIR)/lib/lib$(NAME).so $(OPCODES_LIB) $(BFD_LIB) $(IBERTY_LIB) -lz -ldl
+	strip -s $(BUILD_DIR)/lib/lib$(NAME).so
 
 clean:
 	$(RM) *.o *.so*
