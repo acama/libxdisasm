@@ -2115,19 +2115,19 @@ static const char *int_reg[2][2][32] = {
   { { COLOREG R32  "0" COLEND, COLOREG R32  "1" COLEND, COLOREG R32  "2" COLEND, COLOREG R32  "3" COLEND, COLOREG R32  "4" COLEND, COLOREG R32  "5" COLEND, COLOREG R32  "6" COLEND, COLOREG R32  "7" COLEND,
       COLOREG R32  "8" COLEND, COLOREG R32  "9" COLEND, COLOREG R32 "10" COLEND, COLOREG R32 "11" COLEND, COLOREG R32 "12" COLEND, COLOREG R32 "13" COLEND, COLOREG R32 "14" COLEND, COLOREG R32 "15" COLEND,
       COLOREG R32 "16" COLEND, COLOREG R32 "17" COLEND, COLOREG R32 "18" COLEND, COLOREG R32 "19" COLEND, COLOREG R32 "20" COLEND, COLOREG R32 "21" COLEND, COLOREG R32 "22" COLEND, COLOREG R32 "23" COLEND,
-      COLOREG R32 "24" COLEND, COLOREG R32 "25" COLEND, COLOREG R32 "26" COLEND, COLOREG R32 "27" COLEND, COLOREG R32 "28" COLEND, COLOREG R32 "29" COLEND, COLOREG R32 "30" COLEND,    "wsp" },
+      COLOREG R32 "24" COLEND, COLOREG R32 "25" COLEND, COLOREG R32 "26" COLEND, COLOREG R32 "27" COLEND, COLOREG R32 "28" COLEND, COLOREG R32 "29" COLEND, COLOREG R32 "30" COLEND,    COLOREG "wsp" COLEND },
     { COLOREG R64  "0" COLEND, COLOREG R64  "1" COLEND, COLOREG R64  "2" COLEND, COLOREG R64  "3" COLEND, COLOREG R64  "4" COLEND, COLOREG R64  "5" COLEND, COLOREG R64  "6" COLEND, COLOREG R64  "7" COLEND,
       COLOREG R64  "8" COLEND, COLOREG R64  "9" COLEND, COLOREG R64 "10" COLEND, COLOREG R64 "11" COLEND, COLOREG R64 "12" COLEND, COLOREG R64 "13" COLEND, COLOREG R64 "14" COLEND, COLOREG R64 "15" COLEND,
       COLOREG R64 "16" COLEND, COLOREG R64 "17" COLEND, COLOREG R64 "18" COLEND, COLOREG R64 "19" COLEND, COLOREG R64 "20" COLEND, COLOREG R64 "21" COLEND, COLOREG R64 "22" COLEND, COLOREG R64 "23" COLEND,
-      COLOREG R64 "24" COLEND, COLOREG R64 "25" COLEND, COLOREG R64 "26" COLEND, COLOREG R64 "27" COLEND, COLOREG R64 "28" COLEND, COLOREG R64 "29" COLEND, COLOREG R64 "30" COLEND,     "sp" } },
+      COLOREG R64 "24" COLEND, COLOREG R64 "25" COLEND, COLOREG R64 "26" COLEND, COLOREG R64 "27" COLEND, COLOREG R64 "28" COLEND, COLOREG R64 "29" COLEND, COLOREG R64 "30" COLEND,    COLOREG "sp" COLEND } },
   { { COLOREG R32  "0" COLEND, COLOREG R32  "1" COLEND, COLOREG R32  "2" COLEND, COLOREG R32  "3" COLEND, COLOREG R32  "4" COLEND, COLOREG R32  "5" COLEND, COLOREG R32  "6" COLEND, COLOREG R32  "7" COLEND,
       COLOREG R32  "8" COLEND, COLOREG R32  "9" COLEND, COLOREG R32 "10" COLEND, COLOREG R32 "11" COLEND, COLOREG R32 "12" COLEND, COLOREG R32 "13" COLEND, COLOREG R32 "14" COLEND, COLOREG R32 "15" COLEND,
       COLOREG R32 "16" COLEND, COLOREG R32 "17" COLEND, COLOREG R32 "18" COLEND, COLOREG R32 "19" COLEND, COLOREG R32 "20" COLEND, COLOREG R32 "21" COLEND, COLOREG R32 "22" COLEND, COLOREG R32 "23" COLEND,
-      COLOREG R32 "24" COLEND, COLOREG R32 "25" COLEND, COLOREG R32 "26" COLEND, COLOREG R32 "27" COLEND, COLOREG R32 "28" COLEND, COLOREG R32 "29" COLEND, COLOREG R32 "30" COLEND, COLOREG R32 "zr" },
+      COLOREG R32 "24" COLEND, COLOREG R32 "25" COLEND, COLOREG R32 "26" COLEND, COLOREG R32 "27" COLEND, COLOREG R32 "28" COLEND, COLOREG R32 "29" COLEND, COLOREG R32 "30" COLEND, COLOREG R32 "zr" COLEND },
     { COLOREG R64  "0" COLEND, COLOREG R64  "1" COLEND, COLOREG R64  "2" COLEND, COLOREG R64  "3" COLEND, COLOREG R64  "4" COLEND, COLOREG R64  "5" COLEND, COLOREG R64  "6" COLEND, COLOREG R64  "7" COLEND,
       COLOREG R64  "8" COLEND, COLOREG R64  "9" COLEND, COLOREG R64 "10" COLEND, COLOREG R64 "11" COLEND, COLOREG R64 "12" COLEND, COLOREG R64 "13" COLEND, COLOREG R64 "14" COLEND, COLOREG R64 "15" COLEND,
       COLOREG R64 "16" COLEND, COLOREG R64 "17" COLEND, COLOREG R64 "18" COLEND, COLOREG R64 "19" COLEND, COLOREG R64 "20" COLEND, COLOREG R64 "21" COLEND, COLOREG R64 "22" COLEND, COLOREG R64 "23" COLEND,
-      COLOREG R64 "24" COLEND, COLOREG R64 "25" COLEND, COLOREG R64 "26" COLEND, COLOREG R64 "27" COLEND, COLOREG R64 "28" COLEND, COLOREG R64 "29" COLEND, COLOREG R64 "30" COLEND, COLOREG R64 "zr" } }
+      COLOREG R64 "24" COLEND, COLOREG R64 "25" COLEND, COLOREG R64 "26" COLEND, COLOREG R64 "27" COLEND, COLOREG R64 "28" COLEND, COLOREG R64 "29" COLEND, COLOREG R64 "30" COLEND, COLOREG R64 "zr" COLEND } }
 #undef COLOREG
 #undef COLEND
 #undef R64
@@ -2511,10 +2511,10 @@ aarch64_print_operand (char *buf, size_t size, bfd_vma pc,
     case AARCH64_OPND_AIMM:
     case AARCH64_OPND_HALF:
       if (opnd->shifter.amount)
-	snprintf (buf, size, "#0x%" PRIx64 ", lsl " COLIM "#%d" COLEND, opnd->imm.value,
+	snprintf (buf, size, COLIM "#0x%" PRIx64 COLEND ", lsl " COLIM "#%d" COLEND, opnd->imm.value,
 		  opnd->shifter.amount);
       else
-	snprintf (buf, size, "#0x%" PRIx64, opnd->imm.value);
+	snprintf (buf, size, COLIM "#0x%" PRIx64 COLEND, opnd->imm.value);
       break;
 
     case AARCH64_OPND_SIMD_IMM:
@@ -2624,14 +2624,14 @@ aarch64_print_operand (char *buf, size_t size, bfd_vma pc,
       if (opnd->addr.writeback)
 	{
 	  if (opnd->addr.preind)
-	    snprintf (buf, size, "[%s," COLIM "#%d" COLEND "]!", name, opnd->addr.offset.imm);
+	    snprintf (buf, size, "[%s, " COLIM "#%d" COLEND "]!", name, opnd->addr.offset.imm);
 	  else
-	    snprintf (buf, size, "[%s]," COLIM "#%d" COLEND, name, opnd->addr.offset.imm);
+	    snprintf (buf, size, "[%s], " COLIM "#%d" COLEND, name, opnd->addr.offset.imm);
 	}
       else
 	{
 	  if (opnd->addr.offset.imm)
-	    snprintf (buf, size, "[%s," COLIM "#%d" COLEND "]", name, opnd->addr.offset.imm);
+	    snprintf (buf, size, "[%s, " COLIM "#%d" COLEND "]", name, opnd->addr.offset.imm);
 	  else
 	    snprintf (buf, size, "[%s]", name);
 	}
@@ -2640,7 +2640,7 @@ aarch64_print_operand (char *buf, size_t size, bfd_vma pc,
     case AARCH64_OPND_ADDR_UIMM12:
       name = get_64bit_int_reg_name (opnd->addr.base_regno, 1);
       if (opnd->addr.offset.imm)
-	snprintf (buf, size, "[%s," COLIM "#%d" COLEND "]", name, opnd->addr.offset.imm);
+	snprintf (buf, size, "[%s, " COLIM "#%d" COLEND "]", name, opnd->addr.offset.imm);
       else
 	snprintf (buf, size, "[%s]", name);
       break;
@@ -2686,14 +2686,14 @@ aarch64_print_operand (char *buf, size_t size, bfd_vma pc,
       if (! optional_operand_p (opcode, idx)
 	  || (opnd->barrier->value
 	      != get_optional_operand_default_value (opcode)))
-	snprintf (buf, size, "#0x%x", opnd->barrier->value);
+	snprintf (buf, size, COLIM "#0x%x" COLEND, opnd->barrier->value);
       break;
 
     case AARCH64_OPND_PRFOP:
       if (opnd->prfop->name != NULL)
 	snprintf (buf, size, "%s", opnd->prfop->name);
       else
-	snprintf (buf, size, "#0x%02x", opnd->prfop->value);
+	snprintf (buf, size, COLIM "#0x%02x" COLEND, opnd->prfop->value);
       break;
 
     default:
