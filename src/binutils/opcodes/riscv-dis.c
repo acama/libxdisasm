@@ -132,16 +132,16 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 	  switch (*++d)
 	    {
 	    case 'd':
-	      print (info->stream, "%d", rd);
+	      print (info->stream, COLIM "%d" COLEND, rd);
 	      break;
 	    case 's':
-	      print (info->stream, "%d", rs1);
+	      print (info->stream, COLIM "%d" COLEND, rs1);
 	      break;
 	    case 't':
-	      print (info->stream, "%d", (int) EXTRACT_OPERAND (RS2, l));
+	      print (info->stream, COLIM "%d" COLEND, (int) EXTRACT_OPERAND (RS2, l));
 	      break;
 	    case 'j':
-	      print (info->stream, "%d", (int) EXTRACT_OPERAND (CUSTOM_IMM, l));
+	      print (info->stream, COLIM "%d" COLEND, (int) EXTRACT_OPERAND (CUSTOM_IMM, l));
 	      break;
 	    }
 	  break;
@@ -170,34 +170,34 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 		     riscv_gpr_names[EXTRACT_OPERAND (CRS2, l)]);
 	      break;
 	    case 'i':
-	      print (info->stream, "%d", (int)EXTRACT_RVC_SIMM3 (l));
+	      print (info->stream, COLIM "%d" COLEND, (int)EXTRACT_RVC_SIMM3 (l));
 	      break;
 	    case 'j':
-	      print (info->stream, "%d", (int)EXTRACT_RVC_IMM (l));
+	      print (info->stream, COLIM "%d" COLEND, (int)EXTRACT_RVC_IMM (l));
 	      break;
 	    case 'k':
-	      print (info->stream, "%d", (int)EXTRACT_RVC_LW_IMM (l));
+	      print (info->stream, COLIM "%d" COLEND, (int)EXTRACT_RVC_LW_IMM (l));
 	      break;
 	    case 'l':
-	      print (info->stream, "%d", (int)EXTRACT_RVC_LD_IMM (l));
+	      print (info->stream, COLIM "%d" COLEND, (int)EXTRACT_RVC_LD_IMM (l));
 	      break;
 	    case 'm':
-	      print (info->stream, "%d", (int)EXTRACT_RVC_LWSP_IMM (l));
+	      print (info->stream, COLIM "%d" COLEND, (int)EXTRACT_RVC_LWSP_IMM (l));
 	      break;
 	    case 'n':
-	      print (info->stream, "%d", (int)EXTRACT_RVC_LDSP_IMM (l));
+	      print (info->stream, COLIM "%d" COLEND, (int)EXTRACT_RVC_LDSP_IMM (l));
 	      break;
 	    case 'K':
-	      print (info->stream, "%d", (int)EXTRACT_RVC_ADDI4SPN_IMM (l));
+	      print (info->stream, COLIM "%d" COLEND, (int)EXTRACT_RVC_ADDI4SPN_IMM (l));
 	      break;
 	    case 'L':
-	      print (info->stream, "%d", (int)EXTRACT_RVC_ADDI16SP_IMM (l));
+	      print (info->stream, COLIM "%d" COLEND, (int)EXTRACT_RVC_ADDI16SP_IMM (l));
 	      break;
 	    case 'M':
-	      print (info->stream, "%d", (int)EXTRACT_RVC_SWSP_IMM (l));
+	      print (info->stream, COLIM "%d" COLEND, (int)EXTRACT_RVC_SWSP_IMM (l));
 	      break;
 	    case 'N':
-	      print (info->stream, "%d", (int)EXTRACT_RVC_SDSP_IMM (l));
+	      print (info->stream, COLIM "%d" COLEND, (int)EXTRACT_RVC_SDSP_IMM (l));
 	      break;
 	    case 'p':
 	      info->target = EXTRACT_RVC_B_IMM (l) + pc;
@@ -208,14 +208,14 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 	      (*info->print_address_func) (info->target, info);
 	      break;
 	    case 'u':
-	      print (info->stream, "0x%x",
+	      print (info->stream, COLIM "0x%x" COLEND,
 		     (int) (EXTRACT_RVC_IMM (l) & (RISCV_BIGIMM_REACH-1)));
 	      break;
 	    case '>':
-	      print (info->stream, "0x%x", (int) EXTRACT_RVC_IMM (l) & 0x3f);
+	      print (info->stream, COLIM "0x%x" COLEND, (int) EXTRACT_RVC_IMM (l) & 0x3f);
 	      break;
 	    case '<':
-	      print (info->stream, "0x%x", (int) EXTRACT_RVC_IMM (l) & 0x1f);
+	      print (info->stream, COLIM "0x%x" COLEND, (int) EXTRACT_RVC_IMM (l) & 0x1f);
 	      break;
 	    case 'T': /* floating-point RS2 */
 	      print (info->stream, "%s",
@@ -253,7 +253,7 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 	  break;
 
 	case 'u':
-	  print (info->stream, "0x%x",
+	  print (info->stream, COLIM "0x%x" COLEND,
 		 (unsigned) EXTRACT_UTYPE_IMM (l) >> RISCV_IMM_BITS);
 	  break;
 
@@ -277,12 +277,12 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 	case 'j':
 	  if ((l & MASK_ADDI) == MATCH_ADDI || (l & MASK_JALR) == MATCH_JALR)
 	    maybe_print_address (pd, rs1, EXTRACT_ITYPE_IMM (l));
-	  print (info->stream, "%d", (int) EXTRACT_ITYPE_IMM (l));
+	  print (info->stream, COLIM "%d" COLEND, (int) EXTRACT_ITYPE_IMM (l));
 	  break;
 
 	case 'q':
 	  maybe_print_address (pd, rs1, EXTRACT_STYPE_IMM (l));
-	  print (info->stream, "%d", (int) EXTRACT_STYPE_IMM (l));
+	  print (info->stream, COLIM "%d" COLEND, (int) EXTRACT_STYPE_IMM (l));
 	  break;
 
 	case 'a':
@@ -310,11 +310,11 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 	  break;
 
 	case '>':
-	  print (info->stream, "0x%x", (int) EXTRACT_OPERAND (SHAMT, l));
+	  print (info->stream, COLIM "0x%x" COLEND, (int) EXTRACT_OPERAND (SHAMT, l));
 	  break;
 
 	case '<':
-	  print (info->stream, "0x%x", (int) EXTRACT_OPERAND (SHAMTW, l));
+	  print (info->stream, COLIM "0x%x" COLEND, (int) EXTRACT_OPERAND (SHAMTW, l));
 	  break;
 
 	case 'S':
@@ -347,12 +347,12 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 	    if (csr_name)
 	      print (info->stream, "%s", csr_name);
 	    else
-	      print (info->stream, "0x%x", csr);
+	      print (info->stream, COLIM "0x%x" COLEND, csr);
 	    break;
 	  }
 
 	case 'Z':
-	  print (info->stream, "%d", rs1);
+	  print (info->stream, COLIM "%d" COLEND, rs1);
 	  break;
 
 	default:
