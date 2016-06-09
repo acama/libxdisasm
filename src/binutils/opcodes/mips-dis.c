@@ -50,6 +50,8 @@ struct mips_cp0sel_name
 };
 
 #define COLREG "\e[32m"
+#define COLIM "\e[36m"
+#define COLDIM "\e[2m"
 #define COLEND "\e[m"
 
 static const char * const mips_gpr_names_numeric[32] =
@@ -1178,9 +1180,9 @@ print_insn_arg (struct disassemble_info *info,
 	uval = mips_decode_int_operand (int_op, uval);
 	state->last_int = uval;
 	if (int_op->print_hex)
-	  infprintf (is, "0x%x", uval);
+	  infprintf (is, COLREG "0x%x" COLEND, uval);
 	else
-	  infprintf (is, "%d", uval);
+	  infprintf (is, COLREG "%d" COLEND, uval);
       }
       break;
 
@@ -1192,9 +1194,9 @@ print_insn_arg (struct disassemble_info *info,
 	uval = mint_op->int_map[uval];
 	state->last_int = uval;
 	if (mint_op->print_hex)
-	  infprintf (is, "0x%x", uval);
+	  infprintf (is, COLREG "0x%x" COLEND, uval);
 	else
-	  infprintf (is, "%d", uval);
+	  infprintf (is, COLREG "%d" COLEND, uval);
       }
       break;
 
@@ -1206,7 +1208,7 @@ print_insn_arg (struct disassemble_info *info,
 	uval += msb_op->bias;
 	if (msb_op->add_lsb)
 	  uval -= state->last_int;
-	infprintf (is, "0x%x", uval);
+	infprintf (is, COLREG "0x%x" COLEND, uval);
       }
       break;
 
@@ -1253,7 +1255,7 @@ print_insn_arg (struct disassemble_info *info,
       break;
 
     case OP_PERF_REG:
-      infprintf (is, "%d", uval);
+      infprintf (is, COLREG "%d" COLEND, uval);
       break;
 
     case OP_ADDIUSP_INT:
@@ -1263,7 +1265,7 @@ print_insn_arg (struct disassemble_info *info,
 	sval = mips_signed_operand (operand, uval) * 4;
 	if (sval >= -8 && sval < 8)
 	  sval ^= 0x400;
-	infprintf (is, "%d", sval);
+	infprintf (is, COLREG "%d" COLEND, sval);
 	break;
       }
 
@@ -1407,7 +1409,7 @@ print_insn_arg (struct disassemble_info *info,
 	else if ((vsel & 0x08) == 0)
 	  print_reg (info, opcode, OP_REG_VEC, uval);
 	else
-	  infprintf (is, "0x%x", uval);
+	  infprintf (is, COLREG "0x%x" COLEND, uval);
       }
       break;
 
@@ -1420,7 +1422,7 @@ print_insn_arg (struct disassemble_info *info,
       break;
 
     case OP_PC:
-      infprintf (is, "$pc");
+      infprintf (is, COLREG "$pc" COLEND);
       break;
 
     case OP_VU0_SUFFIX:
