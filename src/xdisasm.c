@@ -280,6 +280,16 @@ int init_dis_env(int arch, int bits, int endian){
             disas = print_insn_riscv;
             break;
 
+        case ARCH_sparc:
+            if (bits == 64) dis->mach = bfd_mach_sparc_v9; // v9 implements sparc64
+            disas = print_insn_sparc;
+            break;
+
+        case ARCH_sh4:
+            dis->mach = bfd_mach_sh4;
+            disas = print_insn_sh;
+            break;
+
         default:
             fprintf(stderr, "libxdisasm: Invalid architecture\n");
             return -1;
