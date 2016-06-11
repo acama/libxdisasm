@@ -281,7 +281,11 @@ int init_dis_env(int arch, int bits, int endian){
             break;
 
         case ARCH_sparc: // TODO: use the different mach's based on the mach from the ELF
-            if (bits == 64) dis->mach = bfd_mach_sparc_v9; // v9 implements sparc64
+            dis->mach = bits;
+            if(endian)
+                dis->endian = BFD_ENDIAN_BIG;
+            else
+                dis->endian = BFD_ENDIAN_LITTLE;
             disas = print_insn_sparc;
             break;
 
