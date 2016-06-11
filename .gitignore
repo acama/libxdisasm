@@ -12,6 +12,15 @@ notes
 .gdb_history
 
 # build files
+src/binutils/bfd/coff-sh.lo
+src/binutils/bfd/cpu-sh.lo
+src/binutils/bfd/cpu-sparc.lo
+src/binutils/bfd/elf32-sh.lo
+src/binutils/bfd/sunos.lo
+src/binutils/opcodes/cgen-bitset.lo
+src/binutils/opcodes/sh-dis.lo
+src/binutils/opcodes/sparc-dis.lo
+src/binutils/opcodes/sparc-opc.lo
 src/binutils/bfd/cpu-riscv.lo
 src/binutils/bfd/elf32-riscv.lo
 src/binutils/bfd/elf64-riscv.lo
