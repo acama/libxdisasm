@@ -12,6 +12,10 @@ notes
 .gdb_history
 
 # build files
+src/binutils/bfd/elf32-sparc.lo
+src/binutils/bfd/elf64-sparc.lo
+src/binutils/bfd/elfxx-sparc.lo
+src/binutils/bfd/sparclinux.lo
 src/binutils/bfd/coff-sh.lo
 src/binutils/bfd/cpu-sh.lo
 src/binutils/bfd/cpu-sparc.lo
