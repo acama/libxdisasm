@@ -217,4 +217,9 @@ src/binutils/opcodes/ppc-dis.lo
 src/binutils/opcodes/ppc-opc.lo
 src/binutils/opcodes/stamp-h1
 src/binutils/opcodes/stamp-lib
+src/binutils/bfd/coff-arm.lo
+src/binutils/bfd/elf32-sparc.lo
+src/binutils/bfd/elf64-sparc.lo
+src/binutils/bfd/elfxx-sparc.lo
+src/binutils/bfd/sparclinux.lo
 
