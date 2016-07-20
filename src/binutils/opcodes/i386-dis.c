@@ -3141,144 +3141,33 @@ static const char *index32;
 static const char **index16;
 static const char **names_bnd;
 
-/*static const char *intel_names64[] = {*/
-  /*"rax", "rcx", "rdx", "rbx", "rsp", "rbp", "rsi", "rdi",*/
-  /*"r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15"*/
-/*};*/
-
-static const char *intel_names64[] = {"\e[32mrax\e[m",
- "\e[32mrcx\e[m",
- "\e[32mrdx\e[m",
- "\e[32mrbx\e[m",
- "\e[32mrsp\e[m",
- "\e[32mrbp\e[m",
- "\e[32mrsi\e[m",
- "\e[32mrdi\e[m",
- "\e[32mr8\e[m",
- "\e[32mr9\e[m",
- "\e[32mr10\e[m",
- "\e[32mr11\e[m",
- "\e[32mr12\e[m",
- "\e[32mr13\e[m",
- "\e[32mr14\e[m",
- "\e[32mr15\e[m"
+static const char *intel_names64[] = {
+  "rax", "rcx", "rdx", "rbx", "rsp", "rbp", "rsi", "rdi",
+  "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15"
 };
-
-/*static const char *intel_names32[] = {*/
-  /*"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi",*/
-  /*"r8d", "r9d", "r10d", "r11d", "r12d", "r13d", "r14d", "r15d"*/
-/*};*/
-
-static const char *intel_names32[] = {"\e[32meax\e[m",
- "\e[32mecx\e[m",
- "\e[32medx\e[m",
- "\e[32mebx\e[m",
- "\e[32mesp\e[m",
- "\e[32mebp\e[m",
- "\e[32mesi\e[m",
- "\e[32medi\e[m",
- "\e[32mr8d\e[m",
- "\e[32mr9d\e[m",
- "\e[32mr10d\e[m",
- "\e[32mr11d\e[m",
- "\e[32mr12d\e[m",
- "\e[32mr13d\e[m",
- "\e[32mr14d\e[m",
- "\e[32mr15d\e[m"
+static const char *intel_names32[] = {
+  "eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi",
+  "r8d", "r9d", "r10d", "r11d", "r12d", "r13d", "r14d", "r15d"
 };
-
-/*static const char *intel_names16[] = {*/
-  /*"ax", "cx", "dx", "bx", "sp", "bp", "si", "di",*/
-  /*"r8w", "r9w", "r10w", "r11w", "r12w", "r13w", "r14w", "r15w"*/
-/*};*/
-
-static const char *intel_names16[] = {"\e[32max\e[m",
- "\e[32mcx\e[m",
- "\e[32mdx\e[m",
- "\e[32mbx\e[m",
- "\e[32msp\e[m",
- "\e[32mbp\e[m",
- "\e[32msi\e[m",
- "\e[32mdi\e[m",
- "\e[32mr8w\e[m",
- "\e[32mr9w\e[m",
- "\e[32mr10w\e[m",
- "\e[32mr11w\e[m",
- "\e[32mr12w\e[m",
- "\e[32mr13w\e[m",
- "\e[32mr14w\e[m",
- "\e[32mr15w\e[m"
+static const char *intel_names16[] = {
+  "ax", "cx", "dx", "bx", "sp", "bp", "si", "di",
+  "r8w", "r9w", "r10w", "r11w", "r12w", "r13w", "r14w", "r15w"
 };
-
-/*static const char *intel_names8[] = {*/
-  /*"al", "cl", "dl", "bl", "ah", "ch", "dh", "bh",*/
-/*};*/
-
-static const char *intel_names8[] = {"\e[32mal\e[m",
- "\e[32mcl\e[m",
- "\e[32mdl\e[m",
- "\e[32mbl\e[m",
- "\e[32mah\e[m",
- "\e[32mch\e[m",
- "\e[32mdh\e[m",
- "\e[32mbh\e[m"
+static const char *intel_names8[] = {
+  "al", "cl", "dl", "bl", "ah", "ch", "dh", "bh",
 };
-
-/*static const char *intel_names8rex[] = {*/
-  /*"al", "cl", "dl", "bl", "spl", "bpl", "sil", "dil",*/
-  /*"r8b", "r9b", "r10b", "r11b", "r12b", "r13b", "r14b", "r15b"*/
-/*};*/
-
-static const char *intel_names8rex[] = {"\e[32mal\e[m",
- "\e[32mcl\e[m",
- "\e[32mdl\e[m",
- "\e[32mbl\e[m",
- "\e[32mspl\e[m",
- "\e[32mbpl\e[m",
- "\e[32msil\e[m",
- "\e[32mdil\e[m",
- "\e[32mr8b\e[m",
- "\e[32mr9b\e[m",
- "\e[32mr10b\e[m",
- "\e[32mr11b\e[m",
- "\e[32mr12b\e[m",
- "\e[32mr13b\e[m",
- "\e[32mr14b\e[m",
- "\e[32mr15b\e[m"
+static const char *intel_names8rex[] = {
+  "al", "cl", "dl", "bl", "spl", "bpl", "sil", "dil",
+  "r8b", "r9b", "r10b", "r11b", "r12b", "r13b", "r14b", "r15b"
 };
-
-/*static const char *intel_names_seg[] = {*/
-  /*"es", "cs", "ss", "ds", "fs", "gs", "?", "?",*/
-/*};*/
-
-static const char *intel_names_seg[] = {"\e[32mes\e[m",
- "\e[32mcs\e[m",
- "\e[32mss\e[m",
- "\e[32mds\e[m",
- "\e[32mfs\e[m",
- "\e[32mgs\e[m",
- "\e[32m?\e[m",
- "\e[32m?\e[m"
+static const char *intel_names_seg[] = {
+  "es", "cs", "ss", "ds", "fs", "gs", "?", "?",
 };
-
-/*static const char *intel_index64 = "riz";*/
-static const char *intel_index64 = "\e[32mriz\e[m";
-/*static const char *intel_index32 = "eiz";*/
-static const char *intel_index32 = "\e[32meiz\e[m";
-/*static const char *intel_index16[] = {*/
-  /*"bx+si", "bx+di", "bp+si", "bp+di", "si", "di", "bp", "bx"*/
-/*};*/
-
-static const char *intel_index16[] = {"\e[32mbx+si\e[m",
- "\e[32mbx+di\e[m",
- "\e[32mbp+si\e[m",
- "\e[32mbp+di\e[m",
- "\e[32msi\e[m",
- "\e[32mdi\e[m",
- "\e[32mbp\e[m",
- "\e[32mbx\e[m"
+static const char *intel_index64 = "riz";
+static const char *intel_index32 = "eiz";
+static const char *intel_index16[] = {
+  "bx+si", "bx+di", "bp+si", "bp+di", "si", "di", "bp", "bx"
 };
-
 
 static const char *att_names64[] = {
   "%rax", "%rcx", "%rdx", "%rbx", "%rsp", "%rbp", "%rsi", "%rdi",
@@ -3309,85 +3198,34 @@ static const char *att_index16[] = {
 };
 
 static const char **names_mm;
-/*static const char *intel_names_mm[] = {*/
-  /*"mm0", "mm1", "mm2", "mm3",*/
-  /*"mm4", "mm5", "mm6", "mm7"*/
-/*};*/
-
-static const char *intel_names_mm[] = {"\e[32mmm0\e[m",
- "\e[32mmm1\e[m",
- "\e[32mmm2\e[m",
- "\e[32mmm3\e[m",
- "\e[32mmm4\e[m",
- "\e[32mmm5\e[m",
- "\e[32mmm6\e[m",
- "\e[32mmm7\e[m"
+static const char *intel_names_mm[] = {
+  "mm0", "mm1", "mm2", "mm3",
+  "mm4", "mm5", "mm6", "mm7"
 };
-
 static const char *att_names_mm[] = {
   "%mm0", "%mm1", "%mm2", "%mm3",
   "%mm4", "%mm5", "%mm6", "%mm7"
 };
 
-/*static const char *intel_names_bnd[] = {*/
-  /*"bnd0", "bnd1", "bnd2", "bnd3"*/
-/*};*/
-
-static const char *intel_names_bnd[] = {"\e[32mbnd0\e[m",
- "\e[32mbnd1\e[m",
- "\e[32mbnd2\e[m",
- "\e[32mbnd3\e[m"};
+static const char *intel_names_bnd[] = {
+  "bnd0", "bnd1", "bnd2", "bnd3"
+};
 
 static const char *att_names_bnd[] = {
   "%bnd0", "%bnd1", "%bnd2", "%bnd3"
 };
 
 static const char **names_xmm;
-/*static const char *intel_names_xmm[] = {*/
-  /*"xmm0", "xmm1", "xmm2", "xmm3",*/
-  /*"xmm4", "xmm5", "xmm6", "xmm7",*/
-  /*"xmm8", "xmm9", "xmm10", "xmm11",*/
-  /*"xmm12", "xmm13", "xmm14", "xmm15",*/
-  /*"xmm16", "xmm17", "xmm18", "xmm19",*/
-  /*"xmm20", "xmm21", "xmm22", "xmm23",*/
-  /*"xmm24", "xmm25", "xmm26", "xmm27",*/
-  /*"xmm28", "xmm29", "xmm30", "xmm31"*/
-/*};*/
-
-static const char *intel_names_xmm[] = {"\e[32mxmm0\e[m",
- "\e[32mxmm1\e[m",
- "\e[32mxmm2\e[m",
- "\e[32mxmm3\e[m",
- "\e[32mxmm4\e[m",
- "\e[32mxmm5\e[m",
- "\e[32mxmm6\e[m",
- "\e[32mxmm7\e[m",
- "\e[32mxmm8\e[m",
- "\e[32mxmm9\e[m",
- "\e[32mxmm10\e[m",
- "\e[32mxmm11\e[m",
- "\e[32mxmm12\e[m",
- "\e[32mxmm13\e[m",
- "\e[32mxmm14\e[m",
- "\e[32mxmm15\e[m",
- "\e[32mxmm16\e[m",
- "\e[32mxmm17\e[m",
- "\e[32mxmm18\e[m",
- "\e[32mxmm19\e[m",
- "\e[32mxmm20\e[m",
- "\e[32mxmm21\e[m",
- "\e[32mxmm22\e[m",
- "\e[32mxmm23\e[m",
- "\e[32mxmm24\e[m",
- "\e[32mxmm25\e[m",
- "\e[32mxmm26\e[m",
- "\e[32mxmm27\e[m",
- "\e[32mxmm28\e[m",
- "\e[32mxmm29\e[m",
- "\e[32mxmm30\e[m",
- "\e[32mxmm31\e[m"
+static const char *intel_names_xmm[] = {
+  "xmm0", "xmm1", "xmm2", "xmm3",
+  "xmm4", "xmm5", "xmm6", "xmm7",
+  "xmm8", "xmm9", "xmm10", "xmm11",
+  "xmm12", "xmm13", "xmm14", "xmm15",
+  "xmm16", "xmm17", "xmm18", "xmm19",
+  "xmm20", "xmm21", "xmm22", "xmm23",
+  "xmm24", "xmm25", "xmm26", "xmm27",
+  "xmm28", "xmm29", "xmm30", "xmm31"
 };
-
 static const char *att_names_xmm[] = {
   "%xmm0", "%xmm1", "%xmm2", "%xmm3",
   "%xmm4", "%xmm5", "%xmm6", "%xmm7",
@@ -3400,51 +3238,16 @@ static const char *att_names_xmm[] = {
 };
 
 static const char **names_ymm;
-/*static const char *intel_names_ymm[] = {*/
-  /*"ymm0", "ymm1", "ymm2", "ymm3",*/
-  /*"ymm4", "ymm5", "ymm6", "ymm7",*/
-  /*"ymm8", "ymm9", "ymm10", "ymm11",*/
-  /*"ymm12", "ymm13", "ymm14", "ymm15",*/
-  /*"ymm16", "ymm17", "ymm18", "ymm19",*/
-  /*"ymm20", "ymm21", "ymm22", "ymm23",*/
-  /*"ymm24", "ymm25", "ymm26", "ymm27",*/
-  /*"ymm28", "ymm29", "ymm30", "ymm31"*/
-/*};*/
-
-static const char *intel_names_ymm[] = {"\e[32mymm0\e[m",
- "\e[32mymm1\e[m",
- "\e[32mymm2\e[m",
- "\e[32mymm3\e[m",
- "\e[32mymm4\e[m",
- "\e[32mymm5\e[m",
- "\e[32mymm6\e[m",
- "\e[32mymm7\e[m",
- "\e[32mymm8\e[m",
- "\e[32mymm9\e[m",
- "\e[32mymm10\e[m",
- "\e[32mymm11\e[m",
- "\e[32mymm12\e[m",
- "\e[32mymm13\e[m",
- "\e[32mymm14\e[m",
- "\e[32mymm15\e[m",
- "\e[32mymm16\e[m",
- "\e[32mymm17\e[m",
- "\e[32mymm18\e[m",
- "\e[32mymm19\e[m",
- "\e[32mymm20\e[m",
- "\e[32mymm21\e[m",
- "\e[32mymm22\e[m",
- "\e[32mymm23\e[m",
- "\e[32mymm24\e[m",
- "\e[32mymm25\e[m",
- "\e[32mymm26\e[m",
- "\e[32mymm27\e[m",
- "\e[32mymm28\e[m",
- "\e[32mymm29\e[m",
- "\e[32mymm30\e[m",
- "\e[32mymm31\e[m"
+static const char *intel_names_ymm[] = {
+  "ymm0", "ymm1", "ymm2", "ymm3",
+  "ymm4", "ymm5", "ymm6", "ymm7",
+  "ymm8", "ymm9", "ymm10", "ymm11",
+  "ymm12", "ymm13", "ymm14", "ymm15",
+  "ymm16", "ymm17", "ymm18", "ymm19",
+  "ymm20", "ymm21", "ymm22", "ymm23",
+  "ymm24", "ymm25", "ymm26", "ymm27",
+  "ymm28", "ymm29", "ymm30", "ymm31"
 };
-
 static const char *att_names_ymm[] = {
   "%ymm0", "%ymm1", "%ymm2", "%ymm3",
   "%ymm4", "%ymm5", "%ymm6", "%ymm7",
@@ -3457,51 +3260,16 @@ static const char *att_names_ymm[] = {
 };
 
 static const char **names_zmm;
-/*static const char *intel_names_zmm[] = {*/
-  /*"zmm0", "zmm1", "zmm2", "zmm3",*/
-  /*"zmm4", "zmm5", "zmm6", "zmm7",*/
-  /*"zmm8", "zmm9", "zmm10", "zmm11",*/
-  /*"zmm12", "zmm13", "zmm14", "zmm15",*/
-  /*"zmm16", "zmm17", "zmm18", "zmm19",*/
-  /*"zmm20", "zmm21", "zmm22", "zmm23",*/
-  /*"zmm24", "zmm25", "zmm26", "zmm27",*/
-  /*"zmm28", "zmm29", "zmm30", "zmm31"*/
-/*};*/
-
-static const char *intel_names_zmm[] = {"\e[32mzmm0\e[m",
- "\e[32mzmm1\e[m",
- "\e[32mzmm2\e[m",
- "\e[32mzmm3\e[m",
- "\e[32mzmm4\e[m",
- "\e[32mzmm5\e[m",
- "\e[32mzmm6\e[m",
- "\e[32mzmm7\e[m",
- "\e[32mzmm8\e[m",
- "\e[32mzmm9\e[m",
- "\e[32mzmm10\e[m",
- "\e[32mzmm11\e[m",
- "\e[32mzmm12\e[m",
- "\e[32mzmm13\e[m",
- "\e[32mzmm14\e[m",
- "\e[32mzmm15\e[m",
- "\e[32mzmm16\e[m",
- "\e[32mzmm17\e[m",
- "\e[32mzmm18\e[m",
- "\e[32mzmm19\e[m",
- "\e[32mzmm20\e[m",
- "\e[32mzmm21\e[m",
- "\e[32mzmm22\e[m",
- "\e[32mzmm23\e[m",
- "\e[32mzmm24\e[m",
- "\e[32mzmm25\e[m",
- "\e[32mzmm26\e[m",
- "\e[32mzmm27\e[m",
- "\e[32mzmm28\e[m",
- "\e[32mzmm29\e[m",
- "\e[32mzmm30\e[m",
- "\e[32mzmm31\e[m"
+static const char *intel_names_zmm[] = {
+  "zmm0", "zmm1", "zmm2", "zmm3",
+  "zmm4", "zmm5", "zmm6", "zmm7",
+  "zmm8", "zmm9", "zmm10", "zmm11",
+  "zmm12", "zmm13", "zmm14", "zmm15",
+  "zmm16", "zmm17", "zmm18", "zmm19",
+  "zmm20", "zmm21", "zmm22", "zmm23",
+  "zmm24", "zmm25", "zmm26", "zmm27",
+  "zmm28", "zmm29", "zmm30", "zmm31"
 };
-
 static const char *att_names_zmm[] = {
   "%zmm0", "%zmm1", "%zmm2", "%zmm3",
   "%zmm4", "%zmm5", "%zmm6", "%zmm7",
@@ -3514,20 +3282,9 @@ static const char *att_names_zmm[] = {
 };
 
 static const char **names_mask;
-/*static const char *intel_names_mask[] = {*/
-  /*"k0", "k1", "k2", "k3", "k4", "k5", "k6", "k7"*/
-/*};*/
-
-static const char *intel_names_mask[] = {"\e[32mk0\e[m",
- "\e[32mk1\e[m",
- "\e[32mk2\e[m",
- "\e[32mk3\e[m",
- "\e[32mk4\e[m",
- "\e[32mk5\e[m",
- "\e[32mk6\e[m",
- "\e[32mk7\e[m"
+static const char *intel_names_mask[] = {
+  "k0", "k1", "k2", "k3", "k4", "k5", "k6", "k7"
 };
-
 static const char *att_names_mask[] = {
   "%k0", "%k1", "%k2", "%k3", "%k4", "%k5", "%k6", "%k7"
 };
@@ -12492,23 +12249,17 @@ prefix_name (int pref, int sizeflag)
     case 0xf0:
       return "lock";
     case 0x2e:
-      /*return "cs";*/
-      return "\e[32mcs\e[m";
+      return "cs";
     case 0x36:
-      /*return "ss";*/
-      return "\e[32mss\e[m";
+      return "ss";
     case 0x3e:
-      /*return "ds";*/
-      return "\e[32mds\e[m";
+      return "ds";
     case 0x26:
-      /*return "es";*/
-      return "\e[32mes\e[m";
+      return "es";
     case 0x64:
-      /*return "fs";*/
-      return "\e[32mfs\e[m";
+      return "fs";
     case 0x65:
-      /*return "gs";*/
-      return "\e[32mgs\e[m";
+      return "gs";
     case 0x66:
       return (sizeflag & DFLAG) ? "data16" : "data32";
     case 0x67:
@@ -14445,15 +14196,12 @@ print_operand_value (char *buf, int hex, bfd_vma disp)
       if (hex)
 	{
 	  char tmp[30];
-      char tmp_color[64];
 	  int i;
-	  /*buf[0] = '0';*/
-	  /*buf[1] = 'x';*/
+	  buf[0] = '0';
+	  buf[1] = 'x';
 	  sprintf_vma (tmp, disp);
 	  for (i = 0; tmp[i] == '0' && tmp[i + 1]; i++);
-      snprintf(tmp_color, sizeof(tmp_color), "\e[36m0x%s\e[m", tmp + i);
-	  /*strcpy (buf + 2, tmp + i);*/
-	  strcpy (buf, tmp_color);
+	  strcpy (buf + 2, tmp + i);
 	}
       else
 	{
@@ -14490,13 +14238,10 @@ print_operand_value (char *buf, int hex, bfd_vma disp)
     }
   else
     {
-        if (hex){
-            /*sprintf (buf, "0x%x", (unsigned int) disp);*/
-            sprintf (buf, "\e[36m0x%x\e[m", (unsigned int) disp);
-        }
-        else{
-            sprintf (buf, "%d", (int) disp);
-        }
+      if (hex)
+	sprintf (buf, "0x%x", (unsigned int) disp);
+      else
+	sprintf (buf, "%d", (int) disp);
     }
 }
 
@@ -14507,7 +14252,6 @@ print_displacement (char *buf, bfd_vma disp)
 {
   bfd_signed_vma val = disp;
   char tmp[30];
-  char tmp_color[64];
   int i, j = 0;
 
   if (val < 0)
@@ -14534,17 +14278,15 @@ print_displacement (char *buf, bfd_vma disp)
 	}
     }
 
-  /*buf[j++] = '0';*/
-  /*buf[j++] = 'x';*/
+  buf[j++] = '0';
+  buf[j++] = 'x';
 
   sprintf_vma (tmp, (bfd_vma) val);
   for (i = 0; tmp[i] == '0'; i++)
     continue;
   if (tmp[i] == '\0')
     i--;
-  snprintf(tmp_color, sizeof(tmp_color), "\e[36m0x%s\e[m", tmp + i);
-  /*strcpy (buf + j, tmp + i);*/
-  strcpy (buf + j, tmp_color);
+  strcpy (buf + j, tmp + i);
 }
 
 static void
@@ -14991,7 +14733,6 @@ OP_E_register (int bytemode, int sizeflag)
       oappend (INTERNAL_DISASSEMBLER_ERROR);
       return;
     }
-
   oappend (names[reg]);
 }
 
@@ -15256,7 +14997,7 @@ OP_E_memory (int bytemode, int sizeflag)
 	  if (intel_syntax && riprel)
 	    {
 	      set_op (disp, 1);
-	      oappend (sizeflag & AFLAG ? "\e[32mrip\e[m" : "\e[32meip\e[m");
+	      oappend (sizeflag & AFLAG ? "rip" : "eip");
 	    }
 	  *obufp = '\0';
 	  if (havebase)
@@ -15677,7 +15418,7 @@ OP_IMREG (int code, int sizeflag)
     {
     case indir_dx_reg:
       if (intel_syntax)
-	s = "\e[32mdx\e[m"; //s = "dx";
+	s = "dx";
       else
 	s = "(%dx)";
       break;

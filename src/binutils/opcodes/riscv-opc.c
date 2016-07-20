@@ -24,41 +24,36 @@
 #include "opcode/riscv.h"
 #include <stdio.h>
 
-#define COLREG "\e[32m"
-#define COLIM "\e[36m"
-#define COLDIM "\e[2m"
-#define COLEND "\e[m"
-
 /* Register names used by gas and objdump.  */
 
 const char * const riscv_gpr_names_numeric[32] =
 {
-  COLREG "x0" COLEND,   COLREG "x1" COLEND,   COLREG "x2" COLEND,   COLREG "x3" COLEND,   COLREG "x4" COLEND,   COLREG "x5" COLEND,   COLREG "x6" COLEND,   COLREG "x7" COLEND,
-  COLREG "x8" COLEND,   COLREG "x9" COLEND,   COLREG "x10" COLEND,  COLREG "x11" COLEND,  COLREG "x12" COLEND,  COLREG "x13" COLEND,  COLREG "x14" COLEND,  COLREG "x15" COLEND,
-  COLREG "x16" COLEND,  COLREG "x17" COLEND,  COLREG "x18" COLEND,  COLREG "x19" COLEND,  COLREG "x20" COLEND,  COLREG "x21" COLEND,  COLREG "x22" COLEND,  COLREG "x23" COLEND,
-  COLREG "x24" COLEND,  COLREG "x25" COLEND,  COLREG "x26" COLEND,  COLREG "x27" COLEND,  COLREG "x28" COLEND,  COLREG "x29" COLEND,  COLREG "x30" COLEND,  COLREG "x31" COLEND
+  "x0",   "x1",   "x2",   "x3",   "x4",   "x5",   "x6",   "x7",
+  "x8",   "x9",   "x10",  "x11",  "x12",  "x13",  "x14",  "x15",
+  "x16",  "x17",  "x18",  "x19",  "x20",  "x21",  "x22",  "x23",
+  "x24",  "x25",  "x26",  "x27",  "x28",  "x29",  "x30",  "x31"
 };
 
 const char * const riscv_gpr_names_abi[32] = {
-  COLREG "zero" COLEND, COLREG "ra" COLEND, COLREG "sp" COLEND,  COLREG "gp" COLEND,  COLREG "tp" COLEND, COLREG "t0" COLEND,  COLREG "t1" COLEND,  COLREG "t2" COLEND,
-  COLREG "s0" COLEND,   COLREG "s1" COLEND, COLREG "a0" COLEND,  COLREG "a1" COLEND,  COLREG "a2" COLEND, COLREG "a3" COLEND,  COLREG "a4" COLEND,  COLREG "a5" COLEND,
-  COLREG "a6" COLEND,   COLREG "a7" COLEND, COLREG "s2" COLEND,  COLREG "s3" COLEND,  COLREG "s4" COLEND, COLREG "s5" COLEND,  COLREG "s6" COLEND,  COLREG "s7" COLEND,
-  COLREG "s8" COLEND,   COLREG "s9" COLEND, COLREG "s10" COLEND, COLREG "s11" COLEND, COLREG "t3" COLEND, COLREG "t4" COLEND,  COLREG "t5" COLEND,  COLREG "t6" COLEND
+  "zero", "ra", "sp",  "gp",  "tp", "t0",  "t1",  "t2",
+  "s0",   "s1", "a0",  "a1",  "a2", "a3",  "a4",  "a5",
+  "a6",   "a7", "s2",  "s3",  "s4", "s5",  "s6",  "s7",
+  "s8",   "s9", "s10", "s11", "t3", "t4",  "t5",  "t6"
 };
 
 const char * const riscv_fpr_names_numeric[32] =
 {
-  COLREG "f0" COLEND,   COLREG "f1" COLEND,   COLREG "f2" COLEND,   COLREG "f3" COLEND,   COLREG "f4" COLEND,   COLREG "f5" COLEND,   COLREG "f6" COLEND,   COLREG "f7" COLEND,
-  COLREG "f8" COLEND,   COLREG "f9" COLEND,   COLREG "f10" COLEND,  COLREG "f11" COLEND,  COLREG "f12" COLEND,  COLREG "f13" COLEND,  COLREG "f14" COLEND,  COLREG "f15" COLEND,
-  COLREG "f16" COLEND,  COLREG "f17" COLEND,  COLREG "f18" COLEND,  COLREG "f19" COLEND,  COLREG "f20" COLEND,  COLREG "f21" COLEND,  COLREG "f22" COLEND,  COLREG "f23" COLEND,
-  COLREG "f24" COLEND,  COLREG "f25" COLEND,  COLREG "f26" COLEND,  COLREG "f27" COLEND,  COLREG "f28" COLEND,  COLREG "f29" COLEND,  COLREG "f30" COLEND,  COLREG "f31" COLEND
+  "f0",   "f1",   "f2",   "f3",   "f4",   "f5",   "f6",   "f7",
+  "f8",   "f9",   "f10",  "f11",  "f12",  "f13",  "f14",  "f15",
+  "f16",  "f17",  "f18",  "f19",  "f20",  "f21",  "f22",  "f23",
+  "f24",  "f25",  "f26",  "f27",  "f28",  "f29",  "f30",  "f31"
 };
 
 const char * const riscv_fpr_names_abi[32] = {
-  COLREG "ft0" COLEND, COLREG "ft1" COLEND, COLREG "ft2" COLEND,  COLREG "ft3" COLEND,  COLREG "ft4" COLEND, COLREG "ft5" COLEND, COLREG "ft6" COLEND,  COLREG "ft7" COLEND,
-  COLREG "fs0" COLEND, COLREG "fs1" COLEND, COLREG "fa0" COLEND,  COLREG "fa1" COLEND,  COLREG "fa2" COLEND, COLREG "fa3" COLEND, COLREG "fa4" COLEND,  COLREG "fa5" COLEND,
-  COLREG "fa6" COLEND, COLREG "fa7" COLEND, COLREG "fs2" COLEND,  COLREG "fs3" COLEND,  COLREG "fs4" COLEND, COLREG "fs5" COLEND, COLREG "fs6" COLEND,  COLREG "fs7" COLEND,
-  COLREG "fs8" COLEND, COLREG "fs9" COLEND, COLREG "fs10" COLEND, COLREG "fs11" COLEND, COLREG "ft8" COLEND, COLREG "ft9" COLEND, COLREG "ft10" COLEND, COLREG "ft11" COLEND
+  "ft0", "ft1", "ft2",  "ft3",  "ft4", "ft5", "ft6",  "ft7",
+  "fs0", "fs1", "fa0",  "fa1",  "fa2", "fa3", "fa4",  "fa5",
+  "fa6", "fa7", "fs2",  "fs3",  "fs4", "fs5", "fs6",  "fs7",
+  "fs8", "fs9", "fs10", "fs11", "ft8", "ft9", "ft10", "ft11"
 };
 
 /* The order of overloaded instructions matters.  Label arguments and

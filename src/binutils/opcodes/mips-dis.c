@@ -49,81 +49,76 @@ struct mips_cp0sel_name
   const char * const name;
 };
 
-#define COLREG "\e[32m"
-#define COLIM "\e[36m"
-#define COLDIM "\e[2m"
-#define COLEND "\e[m"
-
 static const char * const mips_gpr_names_numeric[32] =
 {
-  COLREG "$0" COLEND,   COLREG "$1" COLEND,   COLREG "$2" COLEND,   COLREG "$3" COLEND,   COLREG "$4" COLEND,   COLREG "$5" COLEND,   COLREG "$6" COLEND,   COLREG "$7" COLEND,
-  COLREG "$8" COLEND,   COLREG "$9" COLEND,   COLREG "$10" COLEND,  COLREG "$11" COLEND,  COLREG "$12" COLEND,  COLREG "$13" COLEND,  COLREG "$14" COLEND,  COLREG "$15" COLEND,
-  COLREG "$16" COLEND,  COLREG "$17" COLEND,  COLREG "$18" COLEND,  COLREG "$19" COLEND,  COLREG "$20" COLEND,  COLREG "$21" COLEND,  COLREG "$22" COLEND,  COLREG "$23" COLEND,
-  COLREG "$24" COLEND,  COLREG "$25" COLEND,  COLREG "$26" COLEND,  COLREG "$27" COLEND,  COLREG "$28" COLEND,  COLREG "$29" COLEND,  COLREG "$30" COLEND,  COLREG "$31" COLEND
+  "$0",   "$1",   "$2",   "$3",   "$4",   "$5",   "$6",   "$7",
+  "$8",   "$9",   "$10",  "$11",  "$12",  "$13",  "$14",  "$15",
+  "$16",  "$17",  "$18",  "$19",  "$20",  "$21",  "$22",  "$23",
+  "$24",  "$25",  "$26",  "$27",  "$28",  "$29",  "$30",  "$31"
 };
 
 static const char * const mips_gpr_names_oldabi[32] =
 {
-  COLREG "zero" COLEND, COLREG "at" COLEND,   COLREG "v0" COLEND,   COLREG "v1" COLEND,   COLREG "a0" COLEND,   COLREG "a1" COLEND,   COLREG "a2" COLEND,   COLREG "a3" COLEND,
-  COLREG "t0" COLEND,   COLREG "t1" COLEND,   COLREG "t2" COLEND,   COLREG "t3" COLEND,   COLREG "t4" COLEND,   COLREG "t5" COLEND,   COLREG "t6" COLEND,   COLREG "t7" COLEND,
-  COLREG "s0" COLEND,   COLREG "s1" COLEND,   COLREG "s2" COLEND,   COLREG "s3" COLEND,   COLREG "s4" COLEND,   COLREG "s5" COLEND,   COLREG "s6" COLEND,   COLREG "s7" COLEND,
-  COLREG "t8" COLEND,   COLREG "t9" COLEND,   COLREG "k0" COLEND,   COLREG "k1" COLEND,   COLREG "gp" COLEND,   COLREG "sp" COLEND,   COLREG "s8" COLEND,   COLREG "ra" COLEND
+  "zero", "at",   "v0",   "v1",   "a0",   "a1",   "a2",   "a3",
+  "t0",   "t1",   "t2",   "t3",   "t4",   "t5",   "t6",   "t7",
+  "s0",   "s1",   "s2",   "s3",   "s4",   "s5",   "s6",   "s7",
+  "t8",   "t9",   "k0",   "k1",   "gp",   "sp",   "s8",   "ra"
 };
 
 static const char * const mips_gpr_names_newabi[32] =
 {
-  COLREG "zero" COLEND, COLREG "at" COLEND,   COLREG "v0" COLEND,   COLREG "v1" COLEND,   COLREG "a0" COLEND,   COLREG "a1" COLEND,   COLREG "a2" COLEND,   COLREG "a3" COLEND,
-  COLREG "a4" COLEND,   COLREG "a5" COLEND,   COLREG "a6" COLEND,   COLREG "a7" COLEND,   COLREG "t0" COLEND,   COLREG "t1" COLEND,   COLREG "t2" COLEND,   COLREG "t3" COLEND,
-  COLREG "s0" COLEND,   COLREG "s1" COLEND,   COLREG "s2" COLEND,   COLREG "s3" COLEND,   COLREG "s4" COLEND,   COLREG "s5" COLEND,   COLREG "s6" COLEND,   COLREG "s7" COLEND,
-  COLREG "t8" COLEND,   COLREG "t9" COLEND,   COLREG "k0" COLEND,   COLREG "k1" COLEND,   COLREG "gp" COLEND,   COLREG "sp" COLEND,   COLREG "s8" COLEND,   COLREG "ra" COLEND
+  "zero", "at",   "v0",   "v1",   "a0",   "a1",   "a2",   "a3",
+  "a4",   "a5",   "a6",   "a7",   "t0",   "t1",   "t2",   "t3",
+  "s0",   "s1",   "s2",   "s3",   "s4",   "s5",   "s6",   "s7",
+  "t8",   "t9",   "k0",   "k1",   "gp",   "sp",   "s8",   "ra"
 };
 
 static const char * const mips_fpr_names_numeric[32] =
 {
-  COLREG "$f0" COLEND,  COLREG "$f1" COLEND,  COLREG "$f2" COLEND,  COLREG "$f3" COLEND,  COLREG "$f4" COLEND,  COLREG "$f5" COLEND,  COLREG "$f6" COLEND,  COLREG "$f7" COLEND,
-  COLREG "$f8" COLEND,  COLREG "$f9" COLEND,  COLREG "$f10" COLEND, COLREG "$f11" COLEND, COLREG "$f12" COLEND, COLREG "$f13" COLEND, COLREG "$f14" COLEND, COLREG "$f15" COLEND,
-  COLREG "$f16" COLEND, COLREG "$f17" COLEND, COLREG "$f18" COLEND, COLREG "$f19" COLEND, COLREG "$f20" COLEND, COLREG "$f21" COLEND, COLREG "$f22" COLEND, COLREG "$f23" COLEND,
-  COLREG "$f24" COLEND, COLREG "$f25" COLEND, COLREG "$f26" COLEND, COLREG "$f27" COLEND, COLREG "$f28" COLEND, COLREG "$f29" COLEND, COLREG "$f30" COLEND, COLREG "$f31" COLEND
+  "$f0",  "$f1",  "$f2",  "$f3",  "$f4",  "$f5",  "$f6",  "$f7",
+  "$f8",  "$f9",  "$f10", "$f11", "$f12", "$f13", "$f14", "$f15",
+  "$f16", "$f17", "$f18", "$f19", "$f20", "$f21", "$f22", "$f23",
+  "$f24", "$f25", "$f26", "$f27", "$f28", "$f29", "$f30", "$f31"
 };
 
 static const char * const mips_fpr_names_32[32] =
 {
-  COLREG "fv0" COLEND,  COLREG "fv0f" COLEND, COLREG "fv1" COLEND,  COLREG "fv1f" COLEND, COLREG "ft0" COLEND,  COLREG "ft0f" COLEND, COLREG "ft1" COLEND,  COLREG "ft1f" COLEND,
-  COLREG "ft2" COLEND,  COLREG "ft2f" COLEND, COLREG "ft3" COLEND,  COLREG "ft3f" COLEND, COLREG "fa0" COLEND,  COLREG "fa0f" COLEND, COLREG "fa1" COLEND,  COLREG "fa1f" COLEND,
-  COLREG "ft4" COLEND,  COLREG "ft4f" COLEND, COLREG "ft5" COLEND,  COLREG "ft5f" COLEND, COLREG "fs0" COLEND,  COLREG "fs0f" COLEND, COLREG "fs1" COLEND,  COLREG "fs1f" COLEND,
-  COLREG "fs2" COLEND,  COLREG "fs2f" COLEND, COLREG "fs3" COLEND,  COLREG "fs3f" COLEND, COLREG "fs4" COLEND,  COLREG "fs4f" COLEND, COLREG "fs5" COLEND,  COLREG "fs5f" COLEND
+  "fv0",  "fv0f", "fv1",  "fv1f", "ft0",  "ft0f", "ft1",  "ft1f",
+  "ft2",  "ft2f", "ft3",  "ft3f", "fa0",  "fa0f", "fa1",  "fa1f",
+  "ft4",  "ft4f", "ft5",  "ft5f", "fs0",  "fs0f", "fs1",  "fs1f",
+  "fs2",  "fs2f", "fs3",  "fs3f", "fs4",  "fs4f", "fs5",  "fs5f"
 };
 
 static const char * const mips_fpr_names_n32[32] =
 {
-  COLREG "fv0" COLEND,  COLREG "ft14" COLEND, COLREG "fv1" COLEND,  COLREG "ft15" COLEND, COLREG "ft0" COLEND,  COLREG "ft1" COLEND,  COLREG "ft2" COLEND,  COLREG "ft3" COLEND,
-  COLREG "ft4" COLEND,  COLREG "ft5" COLEND,  COLREG "ft6" COLEND,  COLREG "ft7" COLEND,  COLREG "fa0" COLEND,  COLREG "fa1" COLEND,  COLREG "fa2" COLEND,  COLREG "fa3" COLEND,
-  COLREG "fa4" COLEND,  COLREG "fa5" COLEND,  COLREG "fa6" COLEND,  COLREG "fa7" COLEND,  COLREG "fs0" COLEND,  COLREG "ft8" COLEND,  COLREG "fs1" COLEND,  COLREG "ft9" COLEND,
-  COLREG "fs2" COLEND,  COLREG "ft10" COLEND, COLREG "fs3" COLEND,  COLREG "ft11" COLEND, COLREG "fs4" COLEND,  COLREG "ft12" COLEND, COLREG "fs5" COLEND,  COLREG "ft13" COLEND
+  "fv0",  "ft14", "fv1",  "ft15", "ft0",  "ft1",  "ft2",  "ft3",
+  "ft4",  "ft5",  "ft6",  "ft7",  "fa0",  "fa1",  "fa2",  "fa3",
+  "fa4",  "fa5",  "fa6",  "fa7",  "fs0",  "ft8",  "fs1",  "ft9",
+  "fs2",  "ft10", "fs3",  "ft11", "fs4",  "ft12", "fs5",  "ft13"
 };
 
 static const char * const mips_fpr_names_64[32] =
 {
-  COLREG "fv0" COLEND,  COLREG "ft12" COLEND, COLREG "fv1" COLEND,  COLREG "ft13" COLEND, COLREG "ft0" COLEND,  COLREG "ft1" COLEND,  COLREG "ft2" COLEND,  COLREG "ft3" COLEND,
-  COLREG "ft4" COLEND,  COLREG "ft5" COLEND,  COLREG "ft6" COLEND,  COLREG "ft7" COLEND,  COLREG "fa0" COLEND,  COLREG "fa1" COLEND,  COLREG "fa2" COLEND,  COLREG "fa3" COLEND,
-  COLREG "fa4" COLEND,  COLREG "fa5" COLEND,  COLREG "fa6" COLEND,  COLREG "fa7" COLEND,  COLREG "ft8" COLEND,  COLREG "ft9" COLEND,  COLREG "ft10" COLEND, COLREG "ft11" COLEND,
-  COLREG "fs0" COLEND,  COLREG "fs1" COLEND,  COLREG "fs2" COLEND,  COLREG "fs3" COLEND,  COLREG "fs4" COLEND,  COLREG "fs5" COLEND,  COLREG "fs6" COLEND,  COLREG "fs7" COLEND
+  "fv0",  "ft12", "fv1",  "ft13", "ft0",  "ft1",  "ft2",  "ft3",
+  "ft4",  "ft5",  "ft6",  "ft7",  "fa0",  "fa1",  "fa2",  "fa3",
+  "fa4",  "fa5",  "fa6",  "fa7",  "ft8",  "ft9",  "ft10", "ft11",
+  "fs0",  "fs1",  "fs2",  "fs3",  "fs4",  "fs5",  "fs6",  "fs7"
 };
 
 static const char * const mips_cp0_names_numeric[32] =
 {
-  COLREG "$0" COLEND,   COLREG "$1" COLEND,   COLREG "$2" COLEND,   COLREG "$3" COLEND,   COLREG "$4" COLEND,   COLREG "$5" COLEND,   COLREG "$6" COLEND,   COLREG "$7" COLEND,
-  COLREG "$8" COLEND,   COLREG "$9" COLEND,   COLREG "$10" COLEND,  COLREG "$11" COLEND,  COLREG "$12" COLEND,  COLREG "$13" COLEND,  COLREG "$14" COLEND,  COLREG "$15" COLEND,
-  COLREG "$16" COLEND,  COLREG "$17" COLEND,  COLREG "$18" COLEND,  COLREG "$19" COLEND,  COLREG "$20" COLEND,  COLREG "$21" COLEND,  COLREG "$22" COLEND,  COLREG "$23" COLEND,
-  COLREG "$24" COLEND,  COLREG "$25" COLEND,  COLREG "$26" COLEND,  COLREG "$27" COLEND,  COLREG "$28" COLEND,  COLREG "$29" COLEND,  COLREG "$30" COLEND,  COLREG "$31" COLEND
+  "$0",   "$1",   "$2",   "$3",   "$4",   "$5",   "$6",   "$7",
+  "$8",   "$9",   "$10",  "$11",  "$12",  "$13",  "$14",  "$15",
+  "$16",  "$17",  "$18",  "$19",  "$20",  "$21",  "$22",  "$23",
+  "$24",  "$25",  "$26",  "$27",  "$28",  "$29",  "$30",  "$31"
 };
 
 static const char * const mips_cp1_names_numeric[32] =
 {
-  COLREG "$0" COLEND,   COLREG "$1" COLEND,   COLREG "$2" COLEND,   COLREG "$3" COLEND,   COLREG "$4" COLEND,   COLREG "$5" COLEND,   COLREG "$6" COLEND,   COLREG "$7" COLEND,
-  COLREG "$8" COLEND,   COLREG "$9" COLEND,   COLREG "$10" COLEND,  COLREG "$11" COLEND,  COLREG "$12" COLEND,  COLREG "$13" COLEND,  COLREG "$14" COLEND,  COLREG "$15" COLEND,
-  COLREG "$16" COLEND,  COLREG "$17" COLEND,  COLREG "$18" COLEND,  COLREG "$19" COLEND,  COLREG "$20" COLEND,  COLREG "$21" COLEND,  COLREG "$22" COLEND,  COLREG "$23" COLEND,
-  COLREG "$24" COLEND,  COLREG "$25" COLEND,  COLREG "$26" COLEND,  COLREG "$27" COLEND,  COLREG "$28" COLEND,  COLREG "$29" COLEND,  COLREG "$30" COLEND,  COLREG "$31" COLEND
+  "$0",   "$1",   "$2",   "$3",   "$4",   "$5",   "$6",   "$7",
+  "$8",   "$9",   "$10",  "$11",  "$12",  "$13",  "$14",  "$15",
+  "$16",  "$17",  "$18",  "$19",  "$20",  "$21",  "$22",  "$23",
+  "$24",  "$25",  "$26",  "$27",  "$28",  "$29",  "$30",  "$31"
 };
 
 static const char * const mips_cp0_names_r3000[32] =
@@ -1180,9 +1175,9 @@ print_insn_arg (struct disassemble_info *info,
 	uval = mips_decode_int_operand (int_op, uval);
 	state->last_int = uval;
 	if (int_op->print_hex)
-	  infprintf (is, COLIM "0x%x" COLEND, uval);
+	  infprintf (is, "0x%x", uval);
 	else
-	  infprintf (is, COLIM "%d" COLEND, uval);
+	  infprintf (is, "%d", uval);
       }
       break;
 
@@ -1194,9 +1189,9 @@ print_insn_arg (struct disassemble_info *info,
 	uval = mint_op->int_map[uval];
 	state->last_int = uval;
 	if (mint_op->print_hex)
-	  infprintf (is, COLIM "0x%x" COLEND, uval);
+	  infprintf (is, "0x%x", uval);
 	else
-	  infprintf (is, COLIM "%d" COLEND, uval);
+	  infprintf (is, "%d", uval);
       }
       break;
 
@@ -1208,7 +1203,7 @@ print_insn_arg (struct disassemble_info *info,
 	uval += msb_op->bias;
 	if (msb_op->add_lsb)
 	  uval -= state->last_int;
-	infprintf (is, COLIM "0x%x" COLEND, uval);
+	infprintf (is, "0x%x", uval);
       }
       break;
 
@@ -1255,7 +1250,7 @@ print_insn_arg (struct disassemble_info *info,
       break;
 
     case OP_PERF_REG:
-      infprintf (is, COLIM "%d" COLEND, uval);
+      infprintf (is, "%d", uval);
       break;
 
     case OP_ADDIUSP_INT:
@@ -1265,7 +1260,7 @@ print_insn_arg (struct disassemble_info *info,
 	sval = mips_signed_operand (operand, uval) * 4;
 	if (sval >= -8 && sval < 8)
 	  sval ^= 0x400;
-	infprintf (is, COLIM "%d" COLEND, sval);
+	infprintf (is, "%d", sval);
 	break;
       }
 
@@ -1409,7 +1404,7 @@ print_insn_arg (struct disassemble_info *info,
 	else if ((vsel & 0x08) == 0)
 	  print_reg (info, opcode, OP_REG_VEC, uval);
 	else
-	  infprintf (is, COLIM "0x%x" COLEND, uval);
+	  infprintf (is, "0x%x", uval);
       }
       break;
 
@@ -1422,7 +1417,7 @@ print_insn_arg (struct disassemble_info *info,
       break;
 
     case OP_PC:
-      infprintf (is, COLIM "$pc" COLEND);
+      infprintf (is, "$pc");
       break;
 
     case OP_VU0_SUFFIX:
