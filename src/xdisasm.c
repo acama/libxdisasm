@@ -292,6 +292,10 @@ int init_dis_env(int arch, int bits, int endian){
         case ARCH_sh4:
             dis->mach = bfd_mach_sh4;
             disas = print_insn_sh;
+            if(endian)
+                dis->endian = BFD_ENDIAN_BIG;
+            else
+                dis->endian = BFD_ENDIAN_LITTLE;
             break;
 
         default:
