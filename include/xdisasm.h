@@ -31,6 +31,8 @@
 #define ARCH_sparc 7
 #define ARCH_sh4 8
 
+extern int xdisasm_no_color_g;
+
 // instruction structure
 typedef struct insn_t{
     unsigned long long vma;
