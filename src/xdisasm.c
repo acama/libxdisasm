@@ -38,6 +38,8 @@ char * currptr = curr_insn_str;
 disassembler_ftype disas = NULL; // disassembler 
 disassemble_info* dis = NULL;   // disassembly information structure
 char * disas_options = NULL;
+int xdisasm_no_color_g=0;
+
 
 // insn_t -> void
 // Free the memory
@@ -331,7 +333,10 @@ insn_t * disassemble_one(unsigned long long vma, char * rawbuf, size_t buflen, i
     dis->buffer_vma = vma;
     dis->buffer = buf;
     dis->buffer_length = buflen;
-    dis->print_address_func = override_print_address;
+    if(!xdisasm_no_color_g)
+    {
+        dis->print_address_func = override_print_address;
+    }
     dis->disassembler_options = disas_options;
 
     pos = vma;
@@ -406,7 +411,10 @@ insn_list * disassemble(unsigned long long vma, char * rawbuf, size_t buflen, in
     dis->buffer_vma = vma;
     dis->buffer = buf;
     dis->buffer_length = buflen;
-    dis->print_address_func = override_print_address;
+    if(!xdisasm_no_color_g)
+    {
+        dis->print_address_func = override_print_address;
+    }
     dis->disassembler_options = disas_options;
 
     length = dis->buffer_length;
