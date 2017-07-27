@@ -31,6 +31,11 @@
 #define ARCH_sparc 7
 #define ARCH_sh4 8
 
+//Set this before calling disassemble() or disassemble_one()
+//to disble colorized strings. Ideal for redirecting output to 
+//a file or to less/grep/etc.
+extern int xdisasm_no_color_g;
+
 // instruction structure
 typedef struct insn_t{
     unsigned long long vma;
