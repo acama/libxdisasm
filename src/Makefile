@@ -20,7 +20,6 @@ binutils-libs:
 	test -e $(BFD_LIB) || (cd $(BFD) && ./configure --enable-targets=$(TARGETS) && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC")
 	test -e $(OPCODES_LIB) || (cd $(OPCODES) && ./configure --enable-targets=$(TARGETS) && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC")
 	test -e $(IBERTY_LIB) || (cd $(IBERTY) && ./configure && make -j 4 LDFLAGS="-all-static" CFLAGS="-fPIC")
-	rm -rf $(BINUTILS).tar.gz
 
 lib$(NAME).so: $(NAME).o
 	$(CC) -shared -Wl,-soname,lib$(NAME).so $^ -o $(BUILD_DIR)/lib/lib$(NAME).so $(OPCODES_LIB) $(BFD_LIB) $(IBERTY_LIB) -lz -ldl
