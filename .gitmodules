@@ -1,0 +1,8 @@
+[submodule "src/zstd"]
+	path = src/zstd
+	url = https://github.com/facebook/zstd.git
+	ignore = dirty
+[submodule "src/binutils"]
+	path = src/binutils
+	url = git://sourceware.org/git/binutils-gdb.git
+	ignore = dirty
