@@ -415,7 +415,6 @@ insn_list *disassemble(unsigned long long vma, char *rawbuf, size_t buflen,
                        int arch, int bits, int endian) {
   insn_list *ilist = NULL;
   bfd_byte *buf = NULL;
-  unsigned int count = 0;
   unsigned long long pos = 0, length = 0, max_pos = 0;
 
   dis = (struct disassemble_info *)calloc(1, sizeof(disassemble_info));
@@ -479,7 +478,6 @@ insn_list *disassemble(unsigned long long vma, char *rawbuf, size_t buflen,
     memset(curr_insn_str, 0, sizeof(curr_insn_str));
     currptr = curr_insn_str;
     pos += size;
-    count++;
     append_instr(curri, &ilist);
   }
 
